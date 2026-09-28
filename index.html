@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yeh Jun Lee</title>
+<meta name="description" content="Yeh Jun Lee — Ph.D. in Marketing, Virginia Tech. Measuring what people can't put into words: sensory meaning, brand cues, and language models as validated instruments.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f4ef;--ink:#1d1b18;--soft:#5c574f;--faint:#9a9388;--line:#e3ddd3;--card:#fffdf9;--accent:#c2553a}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1a17;--ink:#f1ece4;--soft:#b5ada1;--faint:#7d766c;--line:#34302a;--card:#24211d;--accent:#e07a5c}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
+nav .name{white-space:nowrap;font-family:Fraunces,serif;font-weight:600;font-size:17px;color:var(--ink);text-decoration:none}
+nav .links{display:flex;gap:22px;flex-wrap:wrap}
+nav .links a{font:400 12px/1 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-decoration:none}
+nav .links a:hover{color:var(--accent)}
+header{padding:88px 0 56px}
+.kicker{font:400 12px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+h1{font:600 clamp(40px,7vw,68px)/1.02 Fraunces,serif;margin:0 0 22px;letter-spacing:-.02em}
+.lede{font:400 clamp(19px,2.4vw,23px)/1.5 Fraunces,serif;color:var(--soft);max-width:680px;margin:0 0 30px}
+.lede em{color:var(--ink);font-style:italic}
+.meta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:10px 18px;border:1px solid var(--ink);border-radius:999px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:500}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn:hover{border-color:var(--accent);color:var(--accent)}.btn.solid:hover{background:var(--accent);color:#fff}
+section{scroll-margin-top:64px;padding:56px 0;border-top:1px solid var(--line)}
+h2{font:400 12px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin:0 0 28px}
+h3{font:600 22px/1.3 Fraunces,serif;margin:0 0 8px}
+p{margin:0 0 14px}
+.muted{color:var(--soft)}
+.tag{font:400 12px "JetBrains Mono",monospace;color:var(--faint);letter-spacing:.04em}
+.paper{max-width:760px}
+.paper .tag{display:block;margin-bottom:12px}
+.stats{display:flex;gap:28px;flex-wrap:wrap;margin:22px 0 4px}
+.stat b{display:block;font:600 26px Fraunces,serif}.stat span{font-size:13px;color:var(--soft)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.card img{width:100%;aspect-ratio:14/9;object-fit:cover;object-position:top;display:block;border-bottom:1px solid var(--line)}
+.card .body{padding:18px 20px 22px}
+.card h3{font-size:19px}
+.card p{font-size:14.5px;color:var(--soft);margin:0 0 10px}
+.card .go{font:400 12px "JetBrains Mono",monospace;color:var(--accent)}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+.gallery figure{margin:0}
+.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;display:block}
+.gallery figcaption{font:italic 400 15px Fraunces,serif;color:var(--soft);margin-top:8px;text-align:center}
+.list{list-style:none;padding:0;margin:0}
+.list li{padding:12px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:16px}
+.list li:last-child{border-bottom:0}
+.list .yr{font:400 13px "JetBrains Mono",monospace;color:var(--faint);white-space:nowrap}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
+a.inline{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+@media (max-width:720px){.gallery{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr;gap:28px}nav .links{gap:14px}nav .links a:not(:last-child){display:none}header{padding:56px 0 40px}.list li{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="name" href="#">Yeh Jun Lee</a>
+  <div class="links"><a href="#research">Research</a><a href="#built">Built</a><a href="#talks">Talks</a><a href="#teaching">Teaching</a><a href="Lee_YehJun_CV.pdf">CV</a></div>
+</div></nav>
+
+<div class="wrap">
+
+<header>
+  <p class="kicker">Ph.D. in Marketing · Virginia Tech</p>
+  <h1>Measuring what people can't put into words.</h1>
+  <p class="lede">A scent suits a brand or it doesn't. A typeface feels <em>playful</em> before anyone can say why. I build instruments that turn these unspoken judgments into measurements — and test them against how people actually perceive.</p>
+  <div class="meta">
+    <a class="btn solid" href="Lee_YehJun_CV.pdf">Download CV</a>
+    <a class="btn" href="mailto:yehjun@vt.edu">yehjun@vt.edu</a>
+    <a class="btn" href="#built">See what I've built</a>
+  </div>
+</header>
+
+<section id="research">
+  <h2>Job market paper</h2>
+  <div class="paper">
+    <h3>From Brand Meaning to Sensory Design: A Shared Map for Choosing Brand Cues</h3>
+    <span class="tag">Sole-authored working paper</span>
+    <p>Brand meanings are abstract, but the cues that express them — a color, a shape, a typeface, a scent — are usually chosen by intuition and evaluated only after launch. I propose <em>sensory connotation</em> as a shared representation that places meanings and candidate cues on common coordinates, so that fit can be measured before execution.</p>
+    <p class="muted">The instrument is validated against criteria the model cannot supply: images rendered without ever seeing the concept's name, direct convergence with human ratings, and trained sensory panels.</p>
+    <div class="stats">
+      <div class="stat"><b>r = .80</b><span>agreement with human ratings</span></div>
+      <div class="stat"><b>26 / 28</b><span>concepts recovered from label-blind images</span></div>
+      <div class="stat"><b>6,236</b><span>commercial fragrances analyzed</span></div>
+      <div class="stat"><b>8</b><span>studies, incl. preregistered</span></div>
+    </div>
+  </div>
+
+  <div class="two" style="margin-top:44px">
+    <div>
+      <h2 style="margin-bottom:18px">In progress</h2>
+      <p><b>Cross-linguistic sensory connotation.</b> <span class="muted">Does the language-to-sensory mapping survive translation between English and Korean?</span></p>
+      <p><b>Spatial sensitivity.</b> <span class="muted">How perceived spatial layout shapes time perception and preference.</span></p>
+      <p><b>AI and creativity.</b> <span class="muted">When lower intrinsic motivation improves creative work with generative AI.</span></p>
+    </div>
+    <div>
+      <h2 style="margin-bottom:18px">Publication</h2>
+      <p>Lee, Y. J., &amp; Park, J. (2022). The safety paradox of self-driving cars. <em>Asia Marketing Journal</em>, 23(4).</p>
+      <h2 style="margin:30px 0 18px">Interests</h2>
+      <p class="muted">Sensory marketing and cross-modal correspondence · brand meaning · language models as measurement instruments · consumer responses to AI</p>
+    </div>
+  </div>
+</section>
+
+<section id="built">
+  <h2>Things I've built</h2>
+  <div class="grid">
+    <a class="card" href="https://simsang-1efb9.web.app/" target="_blank" rel="noopener">
+      <img src="img/brandfit.jpg" alt="SimSang Brand Fit Index">
+      <div class="body"><h3>SimSang Brand Fit Index</h3>
+      <p>Pick a meaning, then switch between fragrance, packaging, wine, and typeface to see the candidates that express it best — all on one seven-axis sensory map.</p>
+      <span class="go">simsang-1efb9.web.app ↗</span></div>
+    </a>
+    <a class="card" href="https://simsang-type.web.app/" target="_blank" rel="noopener">
+      <img src="img/typeface.jpg" alt="SimSang Typeface Finder">
+      <div class="body"><h3>Typeface Finder</h3>
+      <p>1,569 typefaces ranked against 356 meanings by shape, weight, and feel. Type <em>serenity</em> and watch the fonts reorder.</p>
+      <span class="go">simsang-type.web.app ↗</span></div>
+    </a>
+    <a class="card" href="https://ivdv-cddf3.web.app/" target="_blank" rel="noopener">
+      <img src="img/ivdv.jpg" alt="IVDV Explorer">
+      <div class="body"><h3>IVDV Explorer</h3>
+      <p>The causal grammar of consumer research: 28,570 papers and 64,125 variables, organized as a web of causes and effects you can search and walk.</p>
+      <span class="go">ivdv-cddf3.web.app ↗</span></div>
+    </a>
+  </div>
+
+  <h2 style="margin:52px 0 10px">Concepts, rendered</h2>
+  <p class="muted" style="max-width:680px">From the original <a class="inline" href="https://simsang-202503.onrender.com/" target="_blank" rel="noopener">SimSang</a> — a perceptual dictionary that reads the sensory character of a word and renders it as an image or translates it into a fragrance.</p>
+  <div class="gallery">
+    <figure><img src="img/g-hellenism.jpg" alt="Hellenism, rendered" loading="lazy"><figcaption>hellenism</figcaption></figure>
+    <figure><img src="img/g-combustion.jpg" alt="Combustion, rendered" loading="lazy"><figcaption>combustion</figcaption></figure>
+    <figure><img src="img/g-second-skin.jpg" alt="Second skin, rendered" loading="lazy"><figcaption>second skin</figcaption></figure>
+    <figure><img src="img/g-creative.jpg" alt="Creative, rendered" loading="lazy"><figcaption>creative</figcaption></figure>
+  </div>
+</section>
+
+<section id="talks">
+  <h2>Talks</h2>
+  <ul class="list">
+    <li><span>SimSang: Mapping the Geometry of Thought — <em>Association for Consumer Research</em>, Chicago</span><span class="yr">2026</span></li>
+    <li><span>SimSang: Mapping the Geometry of Thought — <em>Society for Consumer Psychology</em>, San Diego</span><span class="yr">2026</span></li>
+    <li><span>The Geometry of Thought — <em>ACR Art Festival</em>, interactive demonstration, Washington, D.C.</span><span class="yr">2025</span></li>
+    <li><span>Spatial Sensitivity — <em>Marketing Science (ISMS)</em>, Sydney</span><span class="yr">2024</span></li>
+    <li><span>AI and Creative Processes — <em>Marketing Science (ISMS)</em>, Miami</span><span class="yr">2023</span></li>
+    <li><span>Safety Paradox of Self-Driving Vehicles — <em>AMA Summer Conference</em> · Best Track Award, Consumer Behavior</span><span class="yr">2020</span></li>
+  </ul>
+</section>
+
+<section id="teaching">
+  <div class="two">
+    <div>
+      <h2>Teaching</h2>
+      <p class="muted" style="margin-bottom:18px">Instructor of record, Virginia Tech</p>
+      <ul class="list">
+        <li><span>Consumer Behavior</span><span class="yr">2026</span></li>
+        <li><span>Marketing Research</span><span class="yr">2026</span></li>
+        <li><span>International Marketing</span><span class="yr">2023</span></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Background</h2>
+      <p>Ph.D., Marketing — Virginia Tech <span class="tag">2026</span><br>
+      M.S., Marketing — Korea University <span class="tag">2020</span><br>
+      B.B.A. — Korea University <span class="tag">2016</span></p>
+      <p class="muted">Before academia, marketing at Franklin Templeton Investments.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer><div class="wrap">Yeh Jun Lee · <a class="inline" href="mailto:yehjun@vt.edu">yehjun@vt.edu</a> · <a class="inline" href="Lee_YehJun_CV.pdf">CV</a></div></footer>
+</body>
+</html>
