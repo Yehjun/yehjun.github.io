@@ -7,65 +7,13 @@
 <meta name="description" content="Yeh Jun Lee — Ph.D. in Marketing, Virginia Tech. Measuring what people can't put into words: sensory meaning, brand cues, and language models as validated instruments.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f7f4ef;--ink:#1d1b18;--soft:#5c574f;--faint:#9a9388;--line:#e3ddd3;--card:#fffdf9;--accent:#c2553a}
-@media (prefers-color-scheme:dark){:root{--bg:#1c1a17;--ink:#f1ece4;--soft:#b5ada1;--faint:#7d766c;--line:#34302a;--card:#24211d;--accent:#e07a5c}}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{max-width:980px;margin:0 auto;padding:0 24px}
-nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
-nav .name{white-space:nowrap;font-family:Fraunces,serif;font-weight:600;font-size:17px;color:var(--ink);text-decoration:none}
-nav .links{display:flex;gap:22px;flex-wrap:wrap}
-nav .links a{font:400 12px/1 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-decoration:none}
-nav .links a:hover{color:var(--accent)}
-header{padding:88px 0 56px}
-.kicker{font:400 12px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
-h1{font:600 clamp(40px,7vw,68px)/1.02 Fraunces,serif;margin:0 0 22px;letter-spacing:-.02em}
-.lede{font:400 clamp(19px,2.4vw,23px)/1.5 Fraunces,serif;color:var(--soft);max-width:680px;margin:0 0 30px}
-.lede em{color:var(--ink);font-style:italic}
-.meta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;padding:10px 18px;border:1px solid var(--ink);border-radius:999px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:500}
-.btn.solid{background:var(--ink);color:var(--bg)}
-.btn:hover{border-color:var(--accent);color:var(--accent)}.btn.solid:hover{background:var(--accent);color:#fff}
-section{scroll-margin-top:64px;padding:56px 0;border-top:1px solid var(--line)}
-h2{font:400 12px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin:0 0 28px}
-h3{font:600 22px/1.3 Fraunces,serif;margin:0 0 8px}
-p{margin:0 0 14px}
-.muted{color:var(--soft)}
-.tag{font:400 12px "JetBrains Mono",monospace;color:var(--faint);letter-spacing:.04em}
-.paper{max-width:760px}
-.paper .tag{display:block;margin-bottom:12px}
-.stats{display:flex;gap:28px;flex-wrap:wrap;margin:22px 0 4px}
-.stat b{display:block;font:600 26px Fraunces,serif}.stat span{font-size:13px;color:var(--soft)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
-.card:hover{transform:translateY(-3px);border-color:var(--accent)}
-.card img{width:100%;aspect-ratio:14/9;object-fit:cover;object-position:top;display:block;border-bottom:1px solid var(--line)}
-.card .body{padding:18px 20px 22px}
-.card h3{font-size:19px}
-.card p{font-size:14.5px;color:var(--soft);margin:0 0 10px}
-.card .go{font:400 12px "JetBrains Mono",monospace;color:var(--accent)}
-.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
-.gallery figure{margin:0}
-.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;display:block}
-.gallery figcaption{font:italic 400 15px Fraunces,serif;color:var(--soft);margin-top:8px;text-align:center}
-.list{list-style:none;padding:0;margin:0}
-.list li{padding:12px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:16px}
-.list li:last-child{border-bottom:0}
-.list .yr{font:400 13px "JetBrains Mono",monospace;color:var(--faint);white-space:nowrap}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
-a.inline{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
-@media (max-width:720px){.gallery{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr;gap:28px}nav .links{gap:14px}nav .links a:not(:last-child){display:none}header{padding:56px 0 40px}.list li{grid-template-columns:1fr}}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav><div class="wrap">
   <a class="name" href="#">Yeh Jun Lee</a>
-  <div class="links"><a href="#research">Research</a><a href="#built">Built</a><a href="#talks">Talks</a><a href="#teaching">Teaching</a><a href="Lee_YehJun_CV.pdf">CV</a></div>
+  <div class="links"><a href="#research">Research</a><a href="#built">Built</a><a href="#writing">Writing</a><a href="#talks">Talks</a><a href="#teaching">Teaching</a><a href="Lee_YehJun_CV.pdf">CV</a></div>
 </div></nav>
 
 <div class="wrap">
@@ -101,6 +49,7 @@ a.inline{color:var(--ink);text-decoration-color:var(--accent);text-underline-off
       <h2 style="margin-bottom:18px">In progress</h2>
       <p><b>Cross-linguistic sensory connotation.</b> <span class="muted">Does the language-to-sensory mapping survive translation between English and Korean?</span></p>
       <p><b>Spatial sensitivity.</b> <span class="muted">How perceived spatial layout shapes time perception and preference.</span></p>
+      <p><b>Promotions and flexible products.</b> <span class="muted">Do price promotions tilt demand toward products that work across more situations? Evidence from thousands of Amazon listings.</span></p>
       <p><b>AI and creativity.</b> <span class="muted">When lower intrinsic motivation improves creative work with generative AI.</span></p>
     </div>
     <div>
@@ -143,6 +92,20 @@ a.inline{color:var(--ink);text-decoration-color:var(--accent);text-underline-off
     <figure><img src="img/g-second-skin.jpg" alt="Second skin, rendered" loading="lazy"><figcaption>second skin</figcaption></figure>
     <figure><img src="img/g-creative.jpg" alt="Creative, rendered" loading="lazy"><figcaption>creative</figcaption></figure>
   </div>
+</section>
+
+<section id="writing" class="writing">
+  <h2>Writing</h2>
+  <a class="entry" href="writing/pages-that-decide.html">
+    <span class="tag">Essay &amp; research plan · September 2026</span>
+    <h3>Pages that decide while you look</h3>
+    <p>Fast, cheap judgment models make it possible for a web page to recompose itself while a visitor is still reading. What that changes for marketing, what could go wrong, and how I plan to study it.</p>
+  </a>
+  <a class="entry" href="writing/spatial-sensitivity.html">
+    <span class="tag">Research note · September 2026</span>
+    <h3>Why the same change feels bigger to some people</h3>
+    <p>A $10 difference is huge in one price range and trivial in another. I think the same logic applies to space, and that people differ in the range they carry around with them.</p>
+  </a>
 </section>
 
 <section id="talks">
