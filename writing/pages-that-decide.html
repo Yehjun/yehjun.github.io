@@ -18,14 +18,16 @@
   <a class="back" href="../#writing">← Writing</a>
   <p class="kicker" style="margin-top:28px">Idea &amp; proposed research</p>
   <h1>Pages that decide while you look</h1>
-  <p class="dek">For twenty years, a web page has changed its mind only between loads. Fast, cheap judgment models may make it possible for a page to recompose itself while you are still reading. This is an idea and a plan for studying it — nothing here has been built or tested yet.</p>
+  <p class="dek">Web pages already react while you read, but mostly through simple rules. Fast, cheap judgment models may make it possible for a page to make an actual judgment about what you need, while you are still reading. This is an idea and a plan for studying it — nothing here has been built or tested yet.</p>
   <p class="byline">Yeh Jun Lee · September 2026 · 9 min read</p>
 
-  <h2>The unit of adaptation is the page load</h2>
+  <h2>Pages react, but they rarely judge</h2>
 
-  <p>Personalization on the web is older than most of the people doing it. Yet almost all of it happens at one moment: when the page is requested. The server looks at what it knows, assembles a page, and sends it. After that the page is fixed. If the site wants to show you something different, you have to give it a reason to rebuild — a refresh, a click, a "load more," a new search.</p>
+  <p>Pages already change while you look at them. An exit-intent pop-up appears when your cursor heads for the close button. A coupon slides in after you scroll halfway. A chat window offers help after thirty seconds. Feeds reorder themselves as you scroll. But these are mostly rules and triggers: <em>if</em> this happens, <em>then</em> show that.</p>
 
-  <p>That is not a design philosophy. It is a cost constraint. Deciding what to show takes a judgment, and good judgments have been expensive and slow. A large language model can make a nuanced call about what a visitor is looking for, but not a hundred times per visit, for every visitor, cheaply enough to put in front of an ordinary product page.</p>
+  <p>The richer kind of decision — reading what this particular visitor seems to be after and choosing what to show them — usually happens at fixed moments: when the page loads, or after a click, a "load more," or a new search.</p>
+
+  <p>Part of the reason is cost. A large language model can make a nuanced call about what a visitor is looking for, but running one dozens of times per visit, for every visitor, has been hard to justify on an ordinary product page — both in money and in waiting time.</p>
 
   <h2>What changed</h2>
 
@@ -35,7 +37,7 @@
 
   <p>Whether those figures hold up independently remains to be seen. If they do, the constraint loosens: when a judgment costs a fraction of a cent, a page could afford to ask "what should this visitor see next?" continuously rather than once.</p>
 
-  <blockquote>The page load was never the right moment to decide. It was just the only moment we could afford.</blockquote>
+  <blockquote>The page load may never have been the best moment to decide. It was the moment we could afford.</blockquote>
 
   <h2>What a deciding page could look like</h2>
 
@@ -43,7 +45,7 @@
 
   <ol>
     <li><strong>The page is built from a fixed set of modules</strong> — a specification table, a lifestyle image, a comparison with a cheaper model, a review summary, a size guide, a sustainability note. These are the pre-approved options. Nothing is generated on the fly.</li>
-    <li><strong>The visitor's behavior is the input</strong> — where they pause, what they scroll past, what they hover over and abandon, what they searched for to get here.</li>
+    <li><strong>The visitor's behavior is the input</strong> — where they pause, what they scroll past, what they hover over and abandon, what they searched for to get here. Because models like Jev read text, this behavior would first have to be summarized into a short description the model can read. How to do that well is itself an open design question.</li>
     <li><strong>A fast judgment picks the next move</strong>: which module to surface, what to emphasize, what to fold away. The decision is a label with a probability, and it can be logged.</li>
     <li><strong>When the model is unsure, it doesn't act.</strong> Low-confidence judgments either leave the page alone or escalate to a slower, more careful call.</li>
   </ol>
@@ -56,9 +58,9 @@
 
   <p><strong>A page that changes while you look can feel helpful or uncanny.</strong> People tolerate being shown a personalized page. They may react very differently to watching one adapt in real time. There may be a threshold where responsiveness turns into a sense of being watched — and where it lies is an empirical question.</p>
 
-  <p><strong>Consistency is part of trust.</strong> Two colleagues comparing a product will see different pages. For some categories that is harmless. For anything involving price or eligibility it is not, and the modules a model is allowed to choose among need to be designed with that in mind.</p>
+  <p><strong>Consistency is part of trust.</strong> Two colleagues comparing a product would see different pages. For some categories that is harmless. For anything involving price or eligibility it is not, and the modules a model is allowed to choose among need to be designed with that in mind.</p>
 
-  <p><strong>Someone has to check whether the judgments are right.</strong> A decision model's great virtue is that it commits: it returns a choice and a probability. That makes it testable in a way a vague personalization engine is not. If the model says "this visitor wants a cheaper alternative, 0.8," we can check how often visitors at 0.8 actually do. This is the part closest to my own work, which is about proving that a model-derived measure tracks what people actually think.</p>
+  <p><strong>Someone has to check whether the judgments are right.</strong> A decision model's great virtue is that it commits: it returns a choice and a probability. That makes it straightforward to test. If the model says "this visitor wants a cheaper alternative, 0.8," we can check how often visitors at 0.8 actually do. This is the part closest to my own work, which is about testing whether a model-derived measure tracks what people actually think.</p>
 
   <h2>Proposed studies</h2>
 
@@ -75,9 +77,13 @@
 
   <h2>The bigger bet</h2>
 
-  <p>Every generation of marketing technology has been shaped by what judgment costs. When judgment was expensive, we segmented: decide once for a whole group. When it got cheaper, we personalized: decide once per person. If it becomes nearly free, the natural unit is neither the group nor the person but the <em>moment</em> — what this person needs right now, while they are still deciding.</p>
+  <p>In broad strokes, marketing technology has been shaped by what judgment costs. When judgment was expensive, we segmented: decide once for a whole group. When it got cheaper, we personalized: decide once per person. If it becomes nearly free, the natural unit is neither the group nor the person but the <em>moment</em> — what this person needs right now, while they are still deciding.</p>
 
   <p>If that shift happens, I would like there to be evidence about when it helps people and when it quietly takes something from them, before the default gets set.</p>
+
+  <h2>Want to work on this?</h2>
+
+  <p>I'm sharing this openly because it is more than one person can do well. It needs people who build web products, people who think about privacy and consumer welfare, and people with real traffic to test on. If any of that is you, I would be glad to hear from you: <a href="mailto:yehjun@vt.edu">yehjun@vt.edu</a>.</p>
 
   <div class="note">This is an idea and a research proposal, not a report of results. No prototype has been built and no data have been collected. Figures about Jev are as reported by TypeSafe AI and secondary coverage in September 2026 and have not been independently verified here.</div>
 

@@ -33,7 +33,7 @@
 
   <h2>The hunch</h2>
 
-  <p>Promotions do something beyond lowering a price. They create a reason to buy <em>now</em> — often before a shopper knows exactly what they will use the thing for. Nobody discovers a specific shelf problem the moment a sale starts. People stock up, buy ahead, pick something up because the price is right.</p>
+  <p>My conjecture is that promotions do something beyond lowering a price. They create a reason to buy <em>now</em>, which may often be before a shopper knows exactly what they will use the thing for. People stock up, buy ahead, pick something up because the price is right.</p>
 
   <p>If you are buying before the use is settled, a product that covers more possible uses is worth more. Flexibility is an option, and options are most valuable under uncertainty. So the chain I have in mind is:</p>
 
@@ -43,16 +43,19 @@
 
   <h2>Looking at the market</h2>
 
-  <p>Before running experiments, I wanted to know whether any trace of this shows up in real marketplace data. Amazon listings make that possible, crudely. Each product page shows whether it is on sale, and many show a badge like "2K+ bought in past month" — a coarse, rounded demand signal, but a real one.</p>
+  <p>Before running experiments, I wanted to know whether any trace of this shows up in real marketplace data. Amazon listings make that possible, crudely. A listing shows whether it is on sale, and many show a badge like "2K+ bought in past month" — a coarse, rounded demand signal, but a real one.</p>
+
+  <p>I used two kinds of data: public Amazon product datasets (storage products from 2023, electronics accessories from 2025), and a smaller set of listings I collected and audited by hand in September 2026 (laptop docks and travel plug adapters).</p>
 
   <p>The harder part is measuring breadth. I coded it from what the listing itself claims:</p>
 
   <ul>
     <li><strong>Storage products:</strong> how many different rooms the product names — kitchen, bathroom, bedroom, garage, laundry, living room, nursery.</li>
-    <li><strong>Electronics accessories:</strong> how many platforms it says it works with — Windows, Mac, ChromeOS, iOS, Android, Linux.</li>
+    <li><strong>Electronics accessories and docks:</strong> how many platforms it says it works with — Windows, Mac, ChromeOS, iOS, Android, Linux.</li>
+    <li><strong>Travel adapters:</strong> whether it is universal/worldwide or made for one region, such as Europe or the UK.</li>
   </ul>
 
-  <p>Then the question is simple: is the demand bump from being on sale larger for broader products? Statistically, that is an interaction between <em>on sale</em> and <em>breadth</em>, with price, reviews, and rating held constant.</p>
+  <p>Then the question is simple: is the demand bump from being on sale larger for broader products? Statistically, that is an interaction between <em>on sale</em> and <em>breadth</em>, holding constant price, reviews, rating, and title length. Title length matters: a longer title simply has more space to list rooms or platforms.</p>
 
   <h2>What came out</h2>
 
@@ -60,10 +63,12 @@
 
   <div class="tablewrap"><table>
     <tr><th>Sample</th><th>Result</th></tr>
-    <tr><td>Storage products and electronics accessories, about 3,600 products</td><td>Discounted products with broader coverage showed a larger demand bump. With breadth measured relative to similar products and price, reviews, rating, and product family held constant, the interaction was positive and reliable (b ≈ .26, t ≈ 3.2). It held in each domain separately, and the combined estimate across the two was b ≈ .24 (t ≈ 3.6).</td></tr>
-    <tr><td>Laptop docks and travel plug adapters, hand-audited (a few dozen products per category after strict cleaning)</td><td>Estimates were imprecise and mixed in direction. Samples this small cannot detect an effect of this size.</td></tr>
-    <tr><td>Same large sample, breadth split into yes/no (one use vs. several)</td><td>Weaker. A two-way split discards most of the information about how many uses a product covers.</td></tr>
+    <tr><td>Storage products and electronics accessories from public datasets, about 3,600 products</td><td>Discounted products with broader coverage showed a larger demand bump. With breadth measured relative to similar products, and price, reviews, rating, title length, and product family held constant, the interaction was positive and reliable (b ≈ .26, t ≈ 3.2). It held in each domain separately, and the combined estimate across the two was b ≈ .24 (t ≈ 3.6).</td></tr>
+    <tr><td>Laptop docks and travel plug adapters, hand-collected (about 250 listings; a few dozen per category after strict cleaning)</td><td>No reliable interaction. Estimates were imprecise and mixed in direction. These samples have far less statistical power than the large one.</td></tr>
+    <tr><td>Same large sample, breadth split into yes/no (one use vs. several)</td><td>Weaker and not statistically reliable. A two-way split discards much of the information about how many uses a product covers.</td></tr>
   </table></div>
+
+  <p>To give a sense of size: the outcome is the log of monthly purchases, so an interaction of about .26 means that for a product one standard deviation broader than similar products, being on sale went with a roughly 30% larger sales bump. That is approximate, given how coarse the purchase badges are.</p>
 
   <p>The pattern is consistent across two very different product domains — rooms in a home and devices on a desk — which is part of why I think it is worth pursuing.</p>
 
