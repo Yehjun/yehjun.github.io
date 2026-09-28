@@ -7,12 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
-<style>
-.post table{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0 24px}
-.post th,.post td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-.post th{font:400 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
-.tablewrap{overflow-x:auto}
-</style>
 </head>
 <body>
 <nav><div class="wrap">
@@ -25,7 +19,7 @@
   <p class="kicker" style="margin-top:28px">Working notes</p>
   <h1>Do discounts favor products that do more?</h1>
   <p class="dek">A price cut applies to everything on sale. So why might it help a storage bin that fits every room more than one made only for the kitchen? Early evidence from thousands of Amazon listings.</p>
-  <p class="byline">Yeh Jun Lee · September 2026 · 8 min read</p>
+  <p class="byline">Yeh Jun Lee · September 2026 · 10 min read</p>
 
   <p>Picture two drawer organizers, both twenty percent off. One is sold as a kitchen organizer. The other says it works in the kitchen, the bathroom, the bedroom, and the garage. The discount is identical. Economically, nothing about the sale makes the flexible one a better deal relative to the specific one.</p>
 
@@ -39,7 +33,22 @@
 
   <p>If you are buying before the use is settled, a product that covers more possible uses is worth more. Flexibility is an option, and options are most valuable under uncertainty. So the chain I have in mind is:</p>
 
-  <div class="formula">promotion → buy now → purchase before the use is decided → breadth is worth more</div>
+  <figure class="diagram">
+    <svg viewBox="0 0 640 230" role="img" aria-label="Conjectured chain: promotion, buy now, use not yet decided, breadth worth more; with what each kind of evidence can see">
+      <rect x="0" y="20" width="130" height="62" rx="10" class="d-box"/><text class="d-t" x="65" y="47" text-anchor="middle">Promotion</text><text class="d-s" x="65" y="66" text-anchor="middle">a sale is on</text>
+      <rect x="170" y="20" width="130" height="62" rx="10" class="d-box"/><text class="d-t" x="235" y="47" text-anchor="middle">Buy now</text><text class="d-s" x="235" y="66" text-anchor="middle">earlier than planned</text>
+      <rect x="340" y="20" width="130" height="62" rx="10" class="d-warm"/><text class="d-t" x="405" y="47" text-anchor="middle">Use undecided</text><text class="d-s" x="405" y="66" text-anchor="middle">"I'll find a use"</text>
+      <rect x="510" y="20" width="130" height="62" rx="10" class="d-box"/><text class="d-t" x="575" y="47" text-anchor="middle">Breadth pays</text><text class="d-s" x="575" y="66" text-anchor="middle">more uses, more value</text>
+      <path class="d-a" d="M132,51h32"/><path class="d-ah" d="M166,51l-8,-5v10z"/>
+      <path class="d-a" d="M302,51h32"/><path class="d-ah" d="M336,51l-8,-5v10z"/>
+      <path class="d-a" d="M472,51h32"/><path class="d-ah" d="M506,51l-8,-5v10z"/>
+      <path class="d-a d-s1" d="M0,112v10h640v-10" stroke-width="2"/>
+      <text class="d-t" x="320" y="146" text-anchor="middle">Market data see only the two ends: sale × breadth → demand</text>
+      <path class="d-a d-s2" d="M170,176v10h300v-10" stroke-width="2"/>
+      <text class="d-t" x="320" y="210" text-anchor="middle">The shopping experiment targets the middle link</text>
+    </svg>
+    <figcaption>The conjecture, link by link. The market data below can show whether sale and breadth go together in demand, but not why. The highlighted link — buying before the use is settled — is what needs a direct test.</figcaption>
+  </figure>
 
   <p>There is a close precedent. Aydinli, Bertini, and Lambrecht (2014, <em>Journal of Marketing</em>) showed that a promotion applied across a whole choice set can still change <em>which</em> option people prefer — it makes purchases feel less consequential, so people deliberate less and lean on feeling. So "an equal discount shifts relative preference" is not new. What would be new is the specific direction: toward products that keep more uses open.</p>
 
@@ -57,9 +66,39 @@
     <li><strong>Travel adapters:</strong> whether it is universal/worldwide or made for one region, such as Europe or the UK.</li>
   </ul>
 
+  <figure class="chart" id="ch-breadth">
+    <p class="ctitle">How many uses listings claim</p>
+    <p class="csub">Share of products by the number of rooms (storage) or platforms (electronics) named in the listing.</p>
+    <figcaption>Most storage listings name a single room; electronics accessories spread out more. Because the distributions differ, breadth is compared within product family (a shoe rack against other shoe racks, a webcam against other webcams).</figcaption>
+  </figure>
+
+  <div class="tablewrap"><table>
+    <tr><th>Sample</th><th>Products</th><th>On sale</th><th>Breadth coded as</th></tr>
+    <tr><td>Storage products (public data, 2023)</td><td>3,188</td><td>1,033 (32%)</td><td>Rooms named: kitchen, bathroom, bedroom, garage…</td></tr>
+    <tr><td>Electronics accessories (public data, 2025)</td><td>459</td><td>158 (34%)</td><td>Platforms named: Windows, Mac, ChromeOS, iOS…</td></tr>
+    <tr><td>Laptop docks (hand-collected, Sept 2026)</td><td>55 after strict cleaning</td><td>27</td><td>Platforms, re-checked against the listing</td></tr>
+    <tr><td>Travel adapters (hand-collected, Sept 2026)</td><td>44 after strict cleaning</td><td>17</td><td>Universal vs. one region</td></tr>
+  </table></div>
+
   <p>Then the question is simple: is the demand bump from being on sale larger for broader products? Statistically, that is an interaction between <em>on sale</em> and <em>breadth</em>, holding constant price, reviews, rating, and title length. Title length matters: a longer title simply has more space to list rooms or platforms.</p>
 
   <h2>What came out</h2>
+
+  <p>Start with the raw picture, before any statistics. Split the large sample into thirds by how broad each product is relative to similar products, and compare typical sales for listings on sale and not.</p>
+
+  <figure class="chart" id="ch-raw">
+    <p class="ctitle">The sale gap is widest for the broadest products</p>
+    <p class="csub">Typical monthly purchases (geometric mean of the "bought in past month" badge), unadjusted.</p>
+    <figcaption>N = 3,616. Listings on sale sell more in every group — sale and regular listings differ in many ways, so the size of that gap means little by itself. What matters is how it changes across groups: about 4.3× and 4.0× in the narrower and middle thirds, 5.7× in the broadest third. Thirds are uneven in size because many products name exactly one use.</figcaption>
+  </figure>
+
+  <p>That is only suggestive: broader products might differ in price, popularity, or category. So the next step holds those things constant.</p>
+
+  <figure class="chart" id="ch-model">
+    <p class="ctitle">How much a sale multiplies sales, by breadth</p>
+    <p class="csub">Model-adjusted, with 95% interval. Price, reviews, rating, title length, and product family held constant.</p>
+    <figcaption>Horizontal axis: breadth relative to similar products, in standard deviations. Vertical axis: the ratio of (1 + monthly purchases) for a product on sale versus the same kind of product not on sale. At average breadth the model puts it near 3×; one standard deviation broader, near 3.9×.</figcaption>
+  </figure>
 
   <p>The clearest evidence comes from the largest sample.</p>
 
@@ -69,6 +108,12 @@
     <tr><td>Laptop docks and travel plug adapters, hand-collected (about 250 listings; a few dozen per category after strict cleaning)</td><td>No reliable interaction. Estimates were imprecise and mixed in direction. These samples have far less statistical power than the large one.</td></tr>
     <tr><td>Same large sample, breadth split into yes/no (one use vs. several)</td><td>Weaker and not statistically reliable. A two-way split discards much of the information about how many uses a product covers.</td></tr>
   </table></div>
+
+  <figure class="chart" id="ch-forest">
+    <p class="ctitle">The sale × breadth interaction, estimated several ways</p>
+    <p class="csub">Coefficient on log(1 + monthly purchases), with 95% intervals (robust standard errors). Right of the dashed line = sale helps broader products more.</p>
+    <figcaption>The grey row splits breadth into one use versus several, which throws away most of the variation; its interval is wide and crosses zero. The hand-collected dock and adapter samples use a different outcome (sales rank) and are too small to show on the same scale; they are summarized in the table above.</figcaption>
+  </figure>
 
   <p>To give a sense of size: the outcome is the log of monthly purchases, so an interaction of about .26 means that for a product one standard deviation broader than similar products, being on sale went with a roughly 30% larger sales bump. That is approximate, given how coarse the purchase badges are.</p>
 
@@ -84,12 +129,64 @@
 
   <p><strong>A shopping experiment.</strong> Participants fill a limited basket from a set of products, some broad and some specific, with a session-wide promotion either on or off. If the account is right, the promoted sessions should produce baskets with a larger share of flexible products — and the shift should be strongest when people haven't been told what they're shopping for.</p>
 
-  <p><strong>The mechanism.</strong> The link to test most directly is the first one: does an ordinary sale move people to buy before their use is decided? The shopping experiment is built to measure exactly that.</p>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>No promotion</th><th>Session-wide promotion</th></tr>
+    <tr><td><strong>Shopping for a stated use</strong><br><span style="color:var(--soft);font-size:13.5px">"Organize your kitchen"</span></td><td>Baseline share of broad products</td><td>Small or no shift — the use is already settled</td></tr>
+    <tr><td><strong>No stated use</strong><br><span style="color:var(--soft);font-size:13.5px">"Pick up what you'd like"</span></td><td>Possibly more broad products, since the use is open</td><td><strong>Largest shift toward broad products</strong> — buying ahead of a decided use</td></tr>
+  </table></div>
+  <p style="font-size:14.5px;color:var(--soft)">Predicted pattern for the proposed 2 × 2 experiment. The key test is the interaction: promotion should matter most when the use is open. Not yet run.</p>
+
+  <p><strong>The mechanism.</strong> The link to test most directly is the middle one: does an ordinary sale move people to buy before their use is decided? The shopping experiment is built to measure exactly that.</p>
 
   <div class="note">These are working notes on an early-stage project. The market analyses are exploratory and cross-sectional, and the results have not been peer reviewed. If you have panel data on promotions, or work on pricing and product design, I'd be glad to collaborate: <a href="mailto:yehjun@vt.edu">yehjun@vt.edu</a>.</div>
 
   <p class="sources">Reference: Aydinli, A., Bertini, M., &amp; Lambrecht, A. (2014). Price promotion for emotional impact. <em>Journal of Marketing</em>, 78(4), 80–96.<br><br><a class="back" href="../#writing">← Back to writing</a></p>
 </article></div>
+<script src="../js/charts.js"></script>
+<script>
+const pct = v => v.toFixed(1) + '%';
+Charts.panels(document.getElementById('ch-breadth'), {
+  series: ['Storage (N = 3,188)', 'Electronics accessories (N = 459)'],
+  panels: [
+    { title: 'Storage', sub: 'rooms named', fmt: pct, max: 80, bars: [
+      { label: '1', value: 72.1, s: 0, tip: '2,299 products' }, { label: '2', value: 17.0, s: 0, tip: '541 products' }, { label: '3', value: 7.2, s: 0, tip: '228 products' },
+      { label: '4', value: 3.1, s: 0, tip: '98 products' }, { label: '5+', value: 0.7, s: 0, tip: '22 products' }] },
+    { title: 'Electronics', sub: 'platforms named', fmt: pct, max: 80, bars: [
+      { label: '1', value: 47.7, s: 1, tip: '219 products' }, { label: '2', value: 31.8, s: 1, tip: '146 products' }, { label: '3', value: 12.9, s: 1, tip: '59 products' },
+      { label: '4', value: 3.7, s: 1, tip: '17 products' }, { label: '5+', value: 3.9, s: 1, tip: '18 products' }] }
+  ]
+});
+const n0 = v => Math.round(v).toString();
+Charts.panels(document.getElementById('ch-raw'), {
+  series: ['Regular price', 'On sale'],
+  panels: [
+    { title: 'Narrower third', fmt: n0, max: 290, bars: [{ label: 'Regular', value: 36.1, s: 0, tip: '888 listings' }, { label: 'Sale', value: 158.4, s: 1, tip: '508 listings' }], foot: '≈ 4.3×' },
+    { title: 'Middle third', fmt: n0, max: 290, bars: [{ label: 'Regular', value: 30.7, s: 0, tip: '805 listings' }, { label: 'Sale', value: 127.0, s: 1, tip: '298 listings' }], foot: '≈ 4.0×' },
+    { title: 'Broadest third', fmt: n0, max: 290, bars: [{ label: 'Regular', value: 44.1, s: 0, tip: '739 listings' }, { label: 'Sale', value: 256.6, s: 1, tip: '378 listings' }], foot: '≈ 5.7×' }
+  ]
+});
+Charts.band(document.getElementById('ch-model'), {
+  xlab: 'Breadth relative to similar products (SD)', ylab: 'sale multiplier',
+  fmt: v => v.toFixed(1) + '×', xname: z => (z > 0 ? '+' : '') + z + ' SD breadth',
+  ymin: 1, ymax: 6, yticks: [1, 2, 3, 4, 5, 6],
+  xticks: [{ v: -1.5, l: '−1.5' }, { v: -1, l: '−1' }, { v: -0.5, l: '−0.5' }, { v: 0, l: 'average' }, { v: 0.5, l: '+0.5' }, { v: 1, l: '+1' }, { v: 1.5, l: '+1.5' }],
+  pts: [
+    { x: -1.5, y: 2.08, lo: 1.54, hi: 2.81 }, { x: -1, y: 2.36, lo: 1.86, hi: 3.00 }, { x: -0.5, y: 2.68, lo: 2.21, hi: 3.25 },
+    { x: 0, y: 3.05, lo: 2.57, hi: 3.62 }, { x: 0.5, y: 3.47, lo: 2.89, hi: 4.16 }, { x: 1, y: 3.94, lo: 3.15, hi: 4.93 }, { x: 1.5, y: 4.48, lo: 3.38, hi: 5.94 }
+  ]
+});
+Charts.forest(document.getElementById('ch-forest'), {
+  min: -0.3, max: 0.6, ticks: [-0.2, 0, 0.2, 0.4, 0.6],
+  rows: [
+    { label: 'Both domains together', sub: 'main estimate · N = 3,616', est: .257, lo: .099, hi: .415 },
+    { label: 'Storage only', sub: 'N = 3,188', est: .263, lo: .086, hi: .440 },
+    { label: 'Electronics only', sub: 'N = 428', est: .216, lo: .018, hi: .415 },
+    { label: 'Combined across domains', sub: 'inverse-variance weighted', est: .243, lo: .110, hi: .375 },
+    { label: 'Breadth vs. whole domain', sub: 'not vs. product family', est: .201, lo: .037, hi: .365 },
+    { label: 'Breadth as yes/no', sub: 'one use vs. several', est: .126, lo: -.209, hi: .462, muted: true }
+  ]
+});
+</script>
 
 <footer><div class="wrap">Yeh Jun Lee · <a class="inline" href="mailto:yehjun@vt.edu">yehjun@vt.edu</a> · <a class="inline" href="../">Home</a></div></footer>
 </body></html>

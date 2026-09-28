@@ -8,14 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.fig{margin:30px -40px 34px}
-.fig .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.fig img{width:100%;display:block;border-radius:12px;border:1px solid var(--line);background:#fff}
-.fig .lab{font:400 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:8px}
-.result{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0 10px}.result .cell{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}.result .cell b{display:block;font:600 44px/1.1 Fraunces,serif;margin:6px 0 4px}.result .cell span{font-size:13.5px;color:var(--soft)}.result .cell .lab{font:400 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}.result .hot{border-color:var(--accent)}.result .hot b{color:var(--accent)}.post p.stat{font:400 13px "JetBrains Mono",monospace;color:var(--soft);margin:0 0 26px}
-.fig figcaption{font-size:14.5px;color:var(--soft);margin-top:12px;line-height:1.6;padding:0 40px}
-@media (max-width:820px){.fig{margin:26px 0}.fig figcaption{padding:0}}
-@media (max-width:520px){.fig .row{grid-template-columns:1fr}}
+.result{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0 10px}.result .cell{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}.result .cell b{display:block;font:600 44px/1.1 Fraunces,serif;margin:6px 0 4px}.result .cell span{font-size:13.5px;color:var(--soft)}.result .cell .lab{font:400 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}.result .hot{border-color:var(--c2)}.result .hot b{color:var(--c2)}.post p.stat{font:400 13px "JetBrains Mono",monospace;color:var(--soft);margin:0 0 26px}
+.fig .one{max-width:62%;margin:14px auto 0}
 </style>
 </head>
 <body>
@@ -28,22 +22,22 @@
   <a class="back" href="../#writing">← Writing</a>
   <p class="kicker" style="margin-top:28px">Research note</p>
   <h1>Why the same change feels bigger to some people</h1>
-  <p class="dek">Put a wall behind an object, and the same distance can start to feel farther. It sounds backwards. It is the result I find most exciting in my research, and the story begins with an elephant.</p>
-  <p class="byline">Yeh Jun Lee · September 2026 · 8 min read</p>
+  <p class="dek">Put a wall behind an object, and the same distance can start to feel farther. It sounds backwards. It is the result I find most exciting in my research, and the story begins with a bird.</p>
+  <p class="byline">Yeh Jun Lee · September 2026 · 10 min read</p>
 
-  <h2>An elephant moves away</h2>
+  <h2>A bird moves away</h2>
 
-  <p>Here is the task. You see an object — an elephant, or a car. Then you see the same object again, smaller, and you're told it has moved further away. How much farther does it seem to have gone?</p>
+  <p>Here is the task in an early form. You see a bird and say how close it feels, from 1 (very close) to 11 (very far). Then you see the same bird again, smaller, and you're told it has moved farther away. How close does it feel now?</p>
 
   <figure class="fig">
     <div class="row">
-      <div><img src="../img/spatial/object-elephant.jpg" alt="The elephant used in the measure"><div class="lab">Object 1</div></div>
-      <div><img src="../img/spatial/object-car.jpg" alt="The car used in the measure"><div class="lab">Object 2</div></div>
+      <div><img src="../img/spatial/measure-1.jpg" alt="Survey screen: a large low-poly bird with the question How close do you feel the bird is to you, rated 1 very close to 11 very far"><div class="lab">Screen 1 — the bird</div></div>
+      <div><img src="../img/spatial/measure-2.jpg" alt="Survey screen: the same bird, smaller, with the text This is the same bird you encountered earlier. The bird has now moved farther away from you. How close do you feel the bird is to you"><div class="lab">Screen 2 — the same bird, moved away</div></div>
     </div>
-    <figcaption>The two objects in the measure. People judge each one separately, and the two answers are averaged so the score isn't tied to a single picture. The two judgments agree well with each other (α = .85–.87).</figcaption>
+    <figcaption>An early version of the measure, as participants saw it. The gap between the two answers is how far the move felt. Later versions ask the question directly — how much farther did it seem to move? — with two objects, an elephant and a car, whose answers are averaged (α = .85–.87).</figcaption>
   </figure>
 
-  <p>Everyone sees exactly the same shrink. And yet people answer very differently. For some, the elephant has barely moved. For others, it has gone a long way.</p>
+  <p>Everyone sees exactly the same shrink. And yet people answer very differently. For some, the bird has barely moved. For others, it has gone a long way.</p>
 
   <p>You could write that off as noise. I couldn't. The same physical change, reliably feeling different sizes to different people, is a strange thing when you stop to look at it. It means the change isn't being read off the world directly. It is being measured against something inside the person.</p>
 
@@ -55,7 +49,24 @@
 
   <div class="formula">how big a change feels = physical change ÷ the range you're measuring against</div>
 
-  <p>Shrink the range and the same change becomes a bigger fraction of it. I call the resulting signal <em>spatial sensitivity</em>. On this account, the people for whom the elephant went a long way aren't mistaken. They're using a smaller ruler.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 640 200" role="img" aria-label="The same move is half of a small range and a quarter of a large one">
+      <text class="d-s" x="0" y="30">Narrow range</text>
+      <rect x="110" y="16" width="240" height="20" rx="4" class="d-warm"/>
+      <rect x="110" y="16" width="120" height="20" rx="4" class="d-c2"/>
+      <path class="d-a" d="M110,44v6h120v-6"/><text class="d-m" x="170" y="66" text-anchor="middle">the move</text>
+      <text class="d-t" x="366" y="31">same move = ½ of the range</text>
+      <text class="d-s" x="0" y="116">Wide range</text>
+      <rect x="110" y="102" width="480" height="20" rx="4" class="d-hot"/>
+      <rect x="110" y="102" width="120" height="20" rx="4" class="d-c1"/>
+      <path class="d-a" d="M110,130v6h120v-6"/><text class="d-m" x="170" y="152" text-anchor="middle">the same move</text>
+      <text class="d-t" x="250" y="152">= ¼ of the range</text>
+      <text class="d-s" x="0" y="192">The filled part is identical in both rows. Only the ruler it is measured against changes.</text>
+    </svg>
+    <figcaption>The core idea in one picture. A fixed change takes up more of a narrow range than a wide one, so it should feel bigger.</figcaption>
+  </figure>
+
+  <p>Shrink the range and the same change becomes a bigger fraction of it. I call the resulting signal <em>spatial sensitivity</em>. On this account, the people for whom the bird went a long way aren't mistaken. They're using a smaller ruler.</p>
 
   <p>The range doesn't have to be a literal box in the head. It is assembled on the fly — from what you can see, what you're paying attention to, what you remember. Some of it may belong to the person. Some of it clearly doesn't, and that is where it gets interesting.</p>
 
@@ -67,27 +78,24 @@
 
   <figure class="fig">
     <div class="row">
-      <div><img src="../img/spatial/open-street.jpg" alt="An open street running into the distance"><div class="lab">Open — the street runs away</div></div>
-      <div><img src="../img/spatial/wall-street.jpg" alt="The elephant with a brick wall put up right behind it"><div class="lab">Bounded — a wall goes up behind it</div></div>
+      <div><img src="../img/spatial/wall-elephant.jpg" alt="Illustrated street between two tall walls with a brick wall right behind an elephant"><div class="lab">Wall — the elephant</div></div>
+      <div><img src="../img/spatial/wall-car.jpg" alt="The same illustrated street and brick wall, with a pickup truck in front of the wall"><div class="lab">Wall — the car, same scene</div></div>
     </div>
-    <div class="row" style="margin-top:14px">
-      <div><img src="../img/spatial/tunnel-elephant.jpg" alt="An elephant in a tunnel"></div>
-      <div><img src="../img/spatial/tunnel-wall.jpg" alt="A tunnel closed off by a wall"></div>
-    </div>
-    <figcaption>The wall manipulation, in an illustrated and a photographic version. What changes is whether the space behind the elephant keeps going or stops.</figcaption>
+    <div class="one"><img src="../img/spatial/open-car.jpg" alt="The same street with no back wall; the road runs on toward open sky"><div class="lab">Open — same street, no wall</div></div>
+    <figcaption>The scenes. The two objects stand on the same street with a brick wall right behind them. In the open version the wall is gone and the road keeps going. Everything else stays the same.</figcaption>
   </figure>
 
   <p>That runs against the usual intuition. A tight, enclosed scene is supposed to feel intimate and near. A simple proximity account says the bounded room should pull things <em>closer</em>. The range account says it should push them <em>away</em>. The two ideas point in opposite directions, which is exactly what you want: the data would have to pick one.</p>
 
   <h2>The wall moves the ruler</h2>
 
-  <p>The most direct test is the simplest. People saw either the open scene or the scene with the wall behind the elephant, and then did the measure: how much farther did the object seem to move?</p>
+  <p>The most direct test is the simplest. People saw either the open scenes or the walled ones, and then did the measure: how much farther did the object seem to move?</p>
 
   <div class="result">
     <div class="cell"><span class="lab">Open</span><b>5.23</b><span>average "how much farther"</span></div>
     <div class="cell hot"><span class="lab">Wall</span><b>6.91</b><span>average "how much farther"</span></div>
   </div>
-  <p class="stat">t(265) = 7.89, p &lt; .001 · N = 267 participants who passed attention checks</p>
+  <p class="stat">t(265) = 7.89, p &lt; .001 · difference 1.68, 95% CI [1.26, 2.10] and d ≈ 0.97 (computed from t) · N = 267 who passed attention checks</p>
 
   <p>Same objects, same shrink. Put a wall behind the scene, and the move felt substantially bigger. The prediction that sounded wrong came out, and not by a little.</p>
 
@@ -104,15 +112,36 @@
 
   <p>The effect depended on the task, and I find that almost more exciting than the direction. The scene mattered when people were actively using it to judge distance. That says something about how this works: the room around you shapes your judgments when it gets pulled into the comparison — not simply because it's there.</p>
 
+  <figure class="chart" id="ch-ruler">
+    <p class="ctitle">Shrink the ruler, three ways</p>
+    <p class="csub">Group means from three studies. Each panel has its own scale; compare within a panel, not across.</p>
+    <figcaption>Study 5: visual induction, N = 267. Study 4: memorize a seven-digit vs. two-digit number, N = 164. Study 3: the active-judgment cells of a 2 × 2 design, N = 132; the full frame × engagement interaction was F(1, 256) = 6.54, p = .011. The last panel is the same Study 5 participants' average on the sensitivity questionnaire; that gap is genuinely small.</figcaption>
+  </figure>
+
   <h2>What else lines up</h2>
 
-  <p>The wall and eclipse studies are two of five projects in this line of work. None is decisive on its own. Together, they keep pointing the same way:</p>
+  <p>The wall and eclipse studies are two of five in this line of work. None is decisive on its own. Together, they keep pointing the same way:</p>
 
   <ul>
     <li><strong>Load moves it too.</strong> Walls aren't the only way to shrink the ruler. Cognitive load did the same thing: people holding a long number in memory felt the same shrink as a bigger move. Fewer things to compare against, a smaller ruler.</li>
     <li><strong>It may travel into time.</strong> In early, exploratory data, people with higher spatial sensitivity tended to feel a delayed reward was further off — the same logic, possibly showing up in a different kind of distance.</li>
     <li><strong>It connects to how people experience their senses.</strong> In two samples, people with a more local, zoomed-in way of seeing scored higher on a self-report measure of sensory reactivity (the Highly Sensitive Person scale). With the elephant-and-car measure, the link showed up again (r = .22, p &lt; .001). If your ruler is small, stimulation should feel bigger — not sharper, just bigger. Both measures are self-reports, so this is not evidence of sharper senses.</li>
   </ul>
+
+  <figure class="chart" id="ch-corr">
+    <p class="ctitle">What the ruler travels with</p>
+    <p class="csub">Correlations with 95% intervals. Dashed line = no relationship.</p>
+    <figcaption>Study 1 used an existing global–local processing task instead of my measure; its sign is flipped here so that "narrower processing" reads as positive (reported as r = −.20 and −.27 with global processing). Intervals computed from r and N.</figcaption>
+  </figure>
+
+  <div class="tablewrap"><table>
+    <tr><th>Study</th><th>What it did</th><th>N</th><th>What came out</th></tr>
+    <tr><td>1a, 1b</td><td>Global–local processing task + HSP scale</td><td>100, 200</td><td>Narrower processing went with higher sensory reactivity (r = .20, .27)</td></tr>
+    <tr><td>2</td><td>Early before-and-after index (the bird) + a lottery with real payouts ($50 now vs. more in three months)</td><td>131 (+139, 72)</td><td>Higher index → the later reward felt farther off → weaker preference to wait. Exploratory.</td></tr>
+    <tr><td>3</td><td>Bounded vs. open scene × active judgment vs. description, then a solar eclipse</td><td>260</td><td>With active judgment, bounded scene → eclipse felt farther, glasses bought later</td></tr>
+    <tr><td>4</td><td>Heavy vs. light memory load</td><td>164</td><td>Load raised the index (3.97 vs. 3.48)</td></tr>
+    <tr><td>5</td><td>Wall vs. open scenes, elephant-and-car index, HSP</td><td>267</td><td>Wall raised the index (6.91 vs. 5.23); index correlated with HSP (r = .22)</td></tr>
+  </table></div>
 
   <h2>Once you see it</h2>
 
@@ -143,6 +172,33 @@
 
   <p class="sources">Reference: Janiszewski, C., &amp; Lichtenstein, D. R. (1999). A range theory account of price perception. <em>Journal of Consumer Research</em>, 25(4), 353–368.<br><br><a class="back" href="../#writing">← Back to writing</a></p>
 </article></div>
+<script src="../js/charts.js"></script>
+<script>
+const f2 = v => v.toFixed(2);
+Charts.panels(document.getElementById('ch-ruler'), {
+  series: ['Wider range (open scene, light load)', 'Narrower range (wall, heavy load)'],
+  panels: [
+    { title: 'Wall', sub: 'how much farther it moved', fmt: f2, bars: [
+      { label: 'Open', value: 5.23, s: 0 }, { label: 'Wall', value: 6.91, s: 1 }], foot: 't(265) = 7.89, p &lt; .001' },
+    { title: 'Memory load', sub: 'spatial sensitivity index', fmt: f2, bars: [
+      { label: 'Light', value: 3.48, s: 0, tip: 'SD 1.52' }, { label: 'Heavy', value: 3.97, s: 1, tip: 'SD 1.38' }], foot: 't(162) = 2.17, p = .032' },
+    { title: 'Eclipse', sub: 'when to buy glasses (higher = later)', fmt: f2, bars: [
+      { label: 'Open', value: 7.14, s: 0, tip: 'SD 3.34' }, { label: 'Bounded', value: 8.53, s: 1, tip: 'SD 3.18' }], foot: 't(130) = 2.45, p = .016' },
+    { title: 'Self-rated sensitivity', sub: 'HSP questionnaire average', fmt: f2, bars: [
+      { label: 'Open', value: 4.19, s: 0 }, { label: 'Wall', value: 4.38, s: 1 }], foot: 't(265) = 1.98, p = .048' }
+  ]
+});
+Charts.forest(document.getElementById('ch-corr'), {
+  min: -0.1, max: 0.5, ticks: [-0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5],
+  rows: [
+    { label: 'Narrower processing ↔ HSP', sub: 'Study 1a · N = 100', est: .20, lo: .004, hi: .381 },
+    { label: 'Narrower processing ↔ HSP', sub: 'Study 1b · N = 200', est: .27, lo: .136, hi: .394 },
+    { label: 'Index ↔ HSP', sub: 'Study 5 · N = 267', est: .22, lo: .103, hi: .331 },
+    { label: 'Index ↔ how far the eclipse felt', sub: 'Study 3, active cells · N = 132', est: .23, lo: .062, hi: .386 },
+    { label: 'Index ↔ buying glasses later', sub: 'Study 3, active cells · N = 132', est: .19, lo: .020, hi: .350 }
+  ]
+});
+</script>
 
 <footer><div class="wrap">Yeh Jun Lee · <a class="inline" href="mailto:yehjun@vt.edu">yehjun@vt.edu</a> · <a class="inline" href="../">Home</a></div></footer>
 </body></html>
