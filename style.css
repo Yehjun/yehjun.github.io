@@ -73,3 +73,20 @@ a.inline{color:var(--ink);text-decoration-color:var(--accent);text-underline-off
 .writing a.entry h3{margin:6px 0 6px;transition:color .2s}
 .writing a.entry:hover h3{color:var(--accent)}
 .writing a.entry p{color:var(--soft);margin:0;font-size:15.5px}
+
+/* ---- concepts gallery ---- */
+.feature{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center;margin:30px 0 40px}
+.feature img{width:100%;border-radius:16px;display:block}
+.feature h3{font-size:26px;margin:8px 0 10px}
+.bars{display:grid;gap:9px;margin-top:10px}
+.bars div{display:grid;grid-template-columns:86px 1fr 30px;align-items:center;gap:12px;font-size:14px}
+.bars span{color:var(--soft)}
+.bars i{display:block;height:8px;border-radius:99px;background:linear-gradient(90deg,#e9a23b,var(--accent));width:calc(var(--v) * 1%);}
+.bars b{font:400 13px "JetBrains Mono",monospace;color:var(--soft)}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-bottom:34px}
+.pair{margin:0}
+.pair div{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pair img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;display:block}
+.pair figcaption{font-size:14.5px;color:var(--soft);margin-top:10px;line-height:1.55}
+.pair figcaption b{color:var(--ink);font-family:Fraunces,serif;font-weight:600}
+@media (max-width:720px){.feature,.pairs{grid-template-columns:1fr;gap:22px}}
