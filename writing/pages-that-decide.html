@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pages that decide while you look — Yeh Jun Lee</title>
-<meta name="description" content="Fast, cheap judgment models like Jev could let a web page make real judgments while a visitor is still reading. What Jev is, what a deciding page might look like, and a research plan for finding out when it helps people.">
+<title>Jev and cheap judgment — Yeh Jun Lee</title>
+<meta name="description" content="A trend note on Jev, a new AI decision model that returns a judgment instead of text for a fraction of a cent: what it is, what an independent test found, and research ideas for marketing.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
@@ -21,24 +21,16 @@
 
 <div class="wrap"><article class="post">
   <a class="back" href="../#writing">← Writing</a>
-  <p class="kicker" style="margin-top:28px">Idea &amp; proposed research</p>
-  <h1>Pages that decide while you look</h1>
-  <p class="dek">Web pages already react while you read, but mostly through simple rules. A new kind of model — fast, cheap, and built to make judgments rather than write text — may let a page make an actual judgment about what you need while you are still reading. This is an idea and a plan for studying it. Nothing here has been built or tested yet.</p>
-  <p class="byline">Yeh Jun Lee · September 2026 · 14 min read</p>
-
-  <h2>Pages react, but they rarely judge</h2>
-
-  <p>Pages already change while you look at them. An exit-intent pop-up appears when your cursor heads for the close button. A coupon slides in after you scroll halfway. A chat window offers help after thirty seconds. Feeds reorder themselves as you scroll. But these are mostly rules and triggers: <em>if</em> this happens, <em>then</em> show that.</p>
-
-  <p>The richer kind of decision — reading what this particular visitor seems to be after and choosing what to show them — usually happens at fixed moments: when the page loads, or after a click, a "load more," or a new search.</p>
-
-  <p>Part of the reason is cost. A large language model can make a nuanced call about what a visitor is looking for, but running one dozens of times per visit, for every visitor, has been hard to justify on an ordinary product page — in money, and in waiting time.</p>
+  <p class="kicker" style="margin-top:28px">Trend note</p>
+  <h1>Jev, and what cheap judgment could mean for marketing</h1>
+  <p class="dek">A new kind of AI model returns a judgment instead of writing text, at a fraction of a cent per call. This note explains what it is and what the first independent test found, then lists a few research ideas it opens up for marketing. If one of them interests you, I'd be glad to work on it together.</p>
+  <p class="byline">Yeh Jun Lee · September 2026 · 8 min read</p>
 
   <h2>What Jev is</h2>
 
-  <p>On September 15, 2026, a company called TypeSafe AI released Jev, which it calls a "System One" model — a nod to Kahneman's fast, intuitive mode of thinking. It is in early access through a closed API.</p>
+  <p>On September 15, 2026, TypeSafe AI released Jev, which it calls a "System One" model, a nod to Kahneman's fast, intuitive mode of thinking. It is available in early access through a closed API.</p>
 
-  <p>The key difference from a chatbot is what comes out. A language model writes prose that a person reads. Jev writes nothing. You define a question and its possible answers in advance; Jev returns one of those answers along with a probability for each. Software can use that output directly, because it can only ever be one of the options you allowed.</p>
+  <p>The difference from a chatbot is in the output. A language model writes prose for a person to read. Jev writes nothing. You define a question and its possible answers in advance, and Jev returns one of those answers along with a probability for each. Software can use the output directly because it can only be one of the options you allowed.</p>
 
   <figure class="diagram">
     <svg viewBox="0 0 640 300" role="img" aria-label="A language model returns a paragraph that must be parsed; a decision model returns one of the allowed options with probabilities">
@@ -66,14 +58,14 @@
       <path class="d-a" d="M458,256h28"/><path class="d-ah" d="M490,256l-8,-5v10z"/>
       <text class="d-t" x="496" y="252">use it directly</text><text class="d-s" x="496" y="270">and log the probability</text>
     </svg>
-    <figcaption>The same question, two kinds of answer. The options and probabilities are made up to show the format; they are not real output.</figcaption>
+    <figcaption>The same question, two kinds of answer. The options and probabilities are illustrative, not real output.</figcaption>
   </figure>
 
-  <p>TypeSafe says it trains the model so that its probabilities are <em>calibrated</em> — so that when it says 0.8, it is right about 80% of the time — and claims more than 100 times lower cost and roughly 200 times faster responses than frontier language models on classification tasks, in the tens to hundreds of milliseconds. Those are the company's own figures.</p>
+  <p>TypeSafe says the model is trained so that its probabilities are <em>calibrated</em>, meaning that when it says 0.8 it is right about 80% of the time. The company also claims more than 100 times lower cost and roughly 200 times faster responses than frontier language models on classification tasks, in the tens to hundreds of milliseconds. These are the company's own figures.</p>
 
-  <h3>An independent test</h3>
+  <h2>What an independent test found</h2>
 
-  <p>A week later, researchers at Carnegie Mellon posted an evaluation of Jev used as a judge (Li, Miao, Krishnan, &amp; Padman, 2026). Under the hood, they report, Jev is a ModernBERT-large encoder with a small decision head — a far smaller model than a frontier LLM. They compared it with GPT-6 used as a judge on the same tasks.</p>
+  <p>A week after the release, researchers at Carnegie Mellon posted an evaluation of Jev used as a judge (Li, Miao, Krishnan, &amp; Padman, 2026). They report that Jev is a ModernBERT-large encoder with a small decision head, a far smaller model than a frontier LLM, and they compared it with GPT-6 on the same judging tasks.</p>
 
   <figure class="chart" id="ch-jev">
     <p class="ctitle">Jev vs. a frontier LLM judge</p>
@@ -81,7 +73,7 @@
     <figcaption>Accuracy is nearly the same on preference (RewardBench) and factuality (HaluEval) judgments, while cost and response time differ by orders of magnitude. The cost bar for Jev is so small it barely shows: $0.044 vs. $12.18 per thousand judgments, or 0.36% of the fee.</figcaption>
   </figure>
 
-  <p>The picture is not uniformly rosy, and that matters for what follows. On JudgeBench, a harder benchmark, Jev trailed by 14.6 points, and the gap grew to 9–20 points on judgments that require checking a derivation or resisting an elaborate but wrong answer. The authors' way around this is a cascade:</p>
+  <p>The results were not uniformly good. On JudgeBench, a harder benchmark, Jev trailed by 14.6 points, and the gap grew to 9–20 points on judgments that require checking a derivation or resisting an elaborate but wrong answer. The authors' solution is a cascade:</p>
 
   <figure class="diagram">
     <svg viewBox="0 0 640 170" role="img" aria-label="Cascade: Jev judges; confident verdicts are accepted, unsure ones are escalated to a larger model">
@@ -98,7 +90,9 @@
     <figcaption>"Accept when confident, escalate when unsure." On 510 held-out preference pairs, this cascade kept 99% of GPT-6's accuracy at about 57% of its fee. The gaps between the two models were concentrated in Jev's low-confidence calls — which is exactly what a cascade needs.</figcaption>
   </figure>
 
-  <p>What caught my attention wasn't the chatbot angle. It was the price, and the speed. Here is what the reported figures would mean for a page that asks one question every few seconds while someone reads:</p>
+  <h2>Why marketers might care</h2>
+
+  <p>The main change is cost and speed. Here is what the reported figures would mean for an application that makes a judgment every few seconds while someone browses:</p>
 
   <div class="tablewrap"><table>
     <tr><th>Assume 30 judgments per visit</th><th>Jev</th><th>Frontier LLM judge</th></tr>
@@ -108,54 +102,14 @@
   </table></div>
   <p class="small">My arithmetic from the per-thousand costs and latencies in Li et al. (2026). Thirty judgments per visit is an assumption for illustration. A cascade would cost more than the Jev column, because unsure calls go to the big model — in the paper's preference test the cascade cost about 57% of GPT-6's fee. On a web page, though, there is a cheaper answer to "unsure": do nothing and leave the page as it is.</p>
 
-  <p>The first column is a rounding error on most marketing budgets. The second is not. If the reported numbers hold up outside the benchmark, the constraint loosens: a page could afford to ask "what should this visitor see next?" continuously rather than once.</p>
+  <p>At the first column's cost, a judgment can be made many times per visitor instead of once. Many marketing decisions have been made once per page load or once per campaign because judgment was expensive. That constraint may loosen.</p>
 
-  <blockquote>The page load may never have been the best moment to decide. It was the moment we could afford.</blockquote>
+  <h2>Ideas worth exploring</h2>
 
-  <h2>What a deciding page could look like</h2>
+  <p>None of these has been built or tested. They are starting points, and each would need careful validation before anyone relied on it.</p>
 
-  <p>The version I have in mind is deliberately modest. Nothing is generated. The model only chooses among things a person has already written and approved.</p>
-
-  <figure class="diagram">
-    <svg viewBox="0 0 640 250" role="img" aria-label="Architecture: browser signals, summarized to text, a typed question to Jev, a confidence gate, then a module from a pre-approved library, with every decision logged">
-      <rect x="0" y="20" width="118" height="76" rx="10" class="d-box"/><text class="d-t" x="59" y="44" text-anchor="middle">1 · Signals</text><text class="d-s" x="59" y="62" text-anchor="middle">pauses, scrolls,</text><text class="d-s" x="59" y="78" text-anchor="middle">hovers, search</text>
-      <path class="d-a" d="M120,58h14"/><path class="d-ah" d="M138,58l-8,-5v10z"/>
-      <rect x="140" y="20" width="118" height="76" rx="10" class="d-box"/><text class="d-t" x="199" y="44" text-anchor="middle">2 · Summary</text><text class="d-s" x="199" y="62" text-anchor="middle">behavior as a</text><text class="d-s" x="199" y="78" text-anchor="middle">short text</text>
-      <path class="d-a" d="M260,58h14"/><path class="d-ah" d="M278,58l-8,-5v10z"/>
-      <rect x="280" y="20" width="118" height="76" rx="10" class="d-hot"/><text class="d-t" x="339" y="44" text-anchor="middle">3 · Judgment</text><text class="d-s" x="339" y="62" text-anchor="middle">typed question</text><text class="d-s" x="339" y="78" text-anchor="middle">→ option + p</text>
-      <path class="d-a" d="M400,58h14"/><path class="d-ah" d="M418,58l-8,-5v10z"/>
-      <rect x="420" y="20" width="98" height="76" rx="10" class="d-warm"/><text class="d-t" x="469" y="44" text-anchor="middle">4 · Gate</text><text class="d-s" x="469" y="62" text-anchor="middle">unsure →</text><text class="d-s" x="469" y="78" text-anchor="middle">do nothing</text>
-      <path class="d-a" d="M520,58h14"/><path class="d-ah" d="M538,58l-8,-5v10z"/>
-      <rect x="540" y="20" width="100" height="76" rx="10" class="d-box"/><text class="d-t" x="590" y="44" text-anchor="middle">5 · Act</text><text class="d-s" x="590" y="62" text-anchor="middle">swap one</text><text class="d-s" x="590" y="78" text-anchor="middle">module</text>
-      <rect x="400" y="140" width="240" height="96" rx="10" class="d-box"/>
-      <text class="d-t" x="414" y="162">Module library (pre-approved)</text>
-      <text class="d-s" x="414" y="182">spec table · lifestyle photo · cheaper</text>
-      <text class="d-s" x="414" y="198">comparison · review summary · size</text>
-      <text class="d-s" x="414" y="214">guide · care &amp; materials · returns</text>
-      <path class="d-a" d="M590,98v38"/><path class="d-ah" d="M590,138l-5,-8h10z"/>
-      <rect x="0" y="140" width="360" height="96" rx="10" class="d-box"/>
-      <text class="d-t" x="14" y="162">Log (every decision)</text>
-      <text class="d-m" x="14" y="184">t=41s  cheaper_alternative  p=0.81  → shown</text>
-      <text class="d-m" x="14" y="202">t=58s  size_guide           p=0.44  → held</text>
-      <text class="d-s" x="14" y="224">Later compared with what the visitor actually did</text>
-      <path class="d-a" d="M339,98 C339,120 300,120 300,136"/><path class="d-ah" d="M300,138l-5,-8h10z"/>
-    </svg>
-    <figcaption>The loop. Price, eligibility, and anything a visitor could be treated unfairly on are not in the library; they stay the same for everyone.</figcaption>
-  </figure>
-
-  <p>The question the page asks could be as plain as this:</p>
-
-<pre><span class="c">// Illustrative — not Jev's actual API syntax</span>
-<span class="k">question</span>: "Given how this visitor has read the page so far,
-           which section would help them most next?"
-<span class="k">context</span>:  "Arrived from search 'warmest jacket under $200'. Read the
-           warmth rating for 14 s. Scrolled past colors. Hovered on
-           the price twice, then scrolled back up to warmth."
-<span class="k">options</span>:  [warmth_details, cheaper_alternative, size_guide,
-           review_summary, do_nothing]</pre>
-  <p class="small">The context line is the hard, unsolved part: turning raw clicks and pauses into a short description a model can read well is itself a design problem worth studying.</p>
-
-  <p>Now picture that loop running on a product page for a winter jacket:</p>
+  <h3>1 · Pages that adapt while you read</h3>
+  <p>A product page could choose among pre-written sections (a spec table, a cheaper comparison, a size guide) based on how a visitor is reading, and act only when the model is confident. The marketing questions are whether this helps people decide, and when responsiveness starts to feel like being watched.</p>
 
   <figure class="diagram">
     <svg viewBox="0 0 640 330" role="img" aria-label="Three snapshots of a winter jacket page over 45 seconds; the page adds a cheaper comparison and folds the size guide as the visitor reads">
@@ -192,82 +146,30 @@
         <text class="d-m" x="0" y="314">p=0.81 → shown</text>
       </g>
     </svg>
-    <figcaption>A hypothetical sequence. The first judgment is unsure, so nothing happens. The second is confident, so a pre-written comparison module is added — below where the visitor is looking, not under their eyes — and the size chart is folded away.</figcaption>
+    <figcaption>A hypothetical sketch, not a built system. The first judgment is unsure, so nothing happens. The second is confident, so a pre-written comparison module is added — below where the visitor is looking, not under their eyes — and the size chart is folded away.</figcaption>
   </figure>
 
-  <p>The hope is that it would feel less like a page rearranging itself and more like a good salesperson who notices you keep glancing at the price tag and quietly mentions the lighter model — without making you ask.</p>
+  <h3>2 · Calibrated judgments as a research tool</h3>
+  <p>Consumer researchers spend a great deal of effort coding open-ended responses, reviews, and ads by hand. A model that returns a label <em>and</em> an honest probability could code at scale while flagging the cases a human should check. The key test is whether its probabilities match human coders' agreement.</p>
 
-  <h2>Six design rules I'd start from</h2>
+  <h3>3 · Checking every creative variant</h3>
+  <p>Brands now generate dozens of image and copy variants per campaign. A cheap judgment could screen each one against the meaning the brand intends ("does this feel <em>serene</em>?") before anything goes out. This connects directly to my own work on measuring the fit between meanings and sensory cues.</p>
 
-  <p>If this is worth doing at all, it is worth doing in a way people would accept if they could see how it works. These are the rules I would build under, and each one is also a testable claim:</p>
+  <h3>4 · How fast machine decisions feel to consumers</h3>
+  <p>When a service decision (a refund, an approval, a routing) is made instantly by a machine, do consumers see it as more efficient or less fair? A "System One" decision is fast by design, and people may read speed as a lack of consideration. That is an open consumer-psychology question in its own right.</p>
 
-  <div class="cards3">
-    <div><b>Choose, never write</b>Only pre-approved modules. No generated claims, so nothing the page says was invented on the fly.</div>
-    <div><b>Unsure means static</b>The default is the ordinary page. The model acts only above a confidence threshold, and the threshold is set from calibration data.</div>
-    <div><b>Price is off-limits</b>Price, discounts, and eligibility never vary by judgment. Two colleagues comparing the jacket should see the same price.</div>
-    <div><b>Change out of view</b>Modules change where the visitor isn't looking. A page that moves under your eyes feels like being watched.</div>
-    <div><b>Say that it adapts</b>A visible note and a switch back to the standard page. Whether disclosure helps or hurts is itself a Stage 2 question.</div>
-    <div><b>Log every decision</b>Each judgment and its probability is recorded, so the system can be audited — and so its accuracy can be checked.</div>
-  </div>
+  <h2>Caveats</h2>
+  <ul>
+    <li>The cost and accuracy figures come from a vendor and from one preprint that has not yet been peer reviewed.</li>
+    <li>Jev is weaker on judgments that require careful reasoning, so the tasks it suits are narrower than a general-purpose model's.</li>
+    <li>Any use that reads visitor behavior raises privacy and consent questions that need to be designed in from the start.</li>
+  </ul>
 
-  <h2>Why this is a marketing question, not just an engineering one</h2>
+  <h2>Want to work on one of these?</h2>
 
-  <p>Even if the engineering works, whether it is a good idea depends on people, and that is where I think the interesting research is.</p>
+  <p>I'm sharing these because they are more than one person can explore well. If you build web products, work on privacy or consumer welfare, have data or traffic to test on, or simply find one of these questions interesting, I'd be glad to hear from you: <a href="mailto:yehjun@vt.edu">yehjun@vt.edu</a>.</p>
 
-  <p><strong>A page that changes while you look can feel helpful or uncanny.</strong> People tolerate being shown a personalized page. They may react very differently to watching one adapt in real time. There may be a threshold where responsiveness turns into a sense of being watched — and where it lies is an empirical question.</p>
-
-  <p><strong>Consistency is part of trust.</strong> Two colleagues comparing a product would see different pages. For some categories that is harmless. For anything involving price or eligibility it is not, which is why those are outside what the model may choose.</p>
-
-  <p><strong>Someone has to check whether the judgments are right.</strong> A decision model's great virtue is that it commits: it returns a choice and a probability. That makes it straightforward to test. If the model says "this visitor wants a cheaper alternative, 0.8," we can check how often visitors at 0.8 actually do. This is the part closest to my own work, which is about testing whether a model-derived measure tracks what people actually think.</p>
-
-  <h2>The plan</h2>
-
-  <p>None of this has been run. The order matters: there is no point asking whether an adaptive page feels creepy if the model can't tell what people want. So validation comes first, then experience, then the field — and each stage has a condition under which I would stop or change course.</p>
-
-  <div class="tablewrap"><table>
-    <tr><th>Stage</th><th>Question</th><th>Design</th><th>I'd stop or rethink if…</th></tr>
-    <tr><td><strong>0 · Build</strong></td><td>Can the loop run fast enough in a browser?</td><td>A sandbox store with 3–4 product pages, a module library, and a behavior-to-text summarizer; replay recorded sessions offline</td><td>End-to-end delay is noticeable, or summaries lose what matters</td></tr>
-    <tr><td><strong>1 · Can it read people?</strong></td><td>Do judgments match what visitors actually want, and are the probabilities honest?</td><td>Participants shop with an assigned goal ("warmest under $200," "a gift, budget unclear"). The assigned goal is the ground truth. Compare Jev's calls with the goal, with simple rules, and with a large LLM judge; plot calibration</td><td>It does no better than simple rules, or its 0.8s are right far less than 80% of the time</td></tr>
-    <tr><td><strong>2 · Helpful or uncanny?</strong></td><td>Does in-view adaptation improve decisions without costing autonomy or trust?</td><td>Static vs. adapted once at load vs. adapting while reading; × disclosed or not; plus changes in view vs. out of view</td><td>Adaptation helps only when hidden, or trust drops even when it helps</td></tr>
-    <tr><td><strong>3 · In the wild</strong></td><td>Does it hold with real visitors and real stakes?</td><td>Randomized test on a site I run, such as the <a href="https://simsang-1efb9.web.app/">SimSang Brand Fit Index</a>: adaptive vs. static, engagement and task completion</td><td>Effects vanish outside the lab</td></tr>
-  </table></div>
-
-  <h3>Why assigned goals make Stage 1 work</h3>
-  <p>The hardest part of validating a mind-reading page is knowing what was actually in the visitor's mind. Asking afterward is noisy and colored by what the page showed. Assigning the goal before people shop sidesteps that: we know what each person was trying to do, so we can score every judgment the model made along the way. The main output would be a calibration plot — for all the times the model said 0.8, how often was it right? A model that is accurate but overconfident would be exactly the wrong thing to put in charge of a page.</p>
-
-  <h3>What Stage 2 would measure</h3>
-  <div class="tablewrap"><table>
-    <tr><th>Outcome</th><th>How</th><th>Why it matters</th></tr>
-    <tr><td>Decision quality</td><td>Did the chosen product fit the assigned goal?</td><td>The whole point: better choices, not just more clicks</td></tr>
-    <tr><td>Time to decide</td><td>Seconds from arrival to choice</td><td>Helpful adaptation should save effort</td></tr>
-    <tr><td>Felt autonomy</td><td>"The choice was mine" items</td><td>The cost I worry about most</td></tr>
-    <tr><td>Sense of being watched</td><td>Creepiness / surveillance items</td><td>Where helpful turns uncanny</td></tr>
-    <tr><td>Trust in the retailer</td><td>Trust items; willingness to return</td><td>Short-term gains can spend long-term trust</td></tr>
-  </table></div>
-
-  <h2>The bigger bet</h2>
-
-  <p>In broad strokes, marketing technology has been shaped by what judgment costs.</p>
-
-  <figure class="diagram">
-    <svg viewBox="0 0 640 150" role="img" aria-label="As judgment gets cheaper, the unit of decision shrinks from the segment to the person to the moment">
-      <path class="d-a" d="M20,60H610"/><path class="d-ah" d="M620,60l-10,-6v12z"/>
-      <circle cx="90" cy="60" r="9" class="d-box"/><text class="d-t" x="90" y="34" text-anchor="middle">The segment</text><text class="d-s" x="90" y="92" text-anchor="middle">decide once</text><text class="d-s" x="90" y="108" text-anchor="middle">for a whole group</text>
-      <circle cx="310" cy="60" r="9" class="d-box"/><text class="d-t" x="310" y="34" text-anchor="middle">The person</text><text class="d-s" x="310" y="92" text-anchor="middle">decide once</text><text class="d-s" x="310" y="108" text-anchor="middle">per visitor</text>
-      <circle cx="530" cy="60" r="9" class="d-c1"/><text class="d-t" x="530" y="34" text-anchor="middle">The moment?</text><text class="d-s" x="530" y="92" text-anchor="middle">decide again and again</text><text class="d-s" x="530" y="108" text-anchor="middle">while they read</text>
-      <text class="d-m" x="20" y="140">judgment expensive</text><text class="d-m" x="620" y="140" text-anchor="end">judgment nearly free</text>
-    </svg>
-  </figure>
-
-  <p>When judgment was expensive, we segmented: decide once for a whole group. When it got cheaper, we personalized: decide once per person. If it becomes nearly free, the natural unit is neither the group nor the person but the <em>moment</em> — what this person needs right now, while they are still deciding.</p>
-
-  <p>That shift could go well or badly. A page that notices you care about warmth and shows you a lighter, cheaper jacket is doing you a favor. A page that notices you hesitating and turns up the pressure is not, and the technology is the same. If the shift happens, I would like there to be evidence about when it helps people and when it quietly takes something from them, before the default gets set.</p>
-
-  <h2>Want to work on this?</h2>
-
-  <p>I'm sharing this openly because it is more than one person can do well. It needs people who build web products, people who think about privacy and consumer welfare, people with real traffic to test on, and anyone with access to these models. If any of that is you, I would be glad to hear from you: <a href="mailto:yehjun@vt.edu">yehjun@vt.edu</a>.</p>
-
-  <div class="note">This is an idea and a research proposal, not a report of results. No prototype has been built and no data have been collected. Cost, speed, and calibration claims labeled as the company's come from TypeSafe AI and have not been independently verified. Accuracy, cost-per-judgment, latency, and cascade figures come from Li et al. (2026), a preprint that has not yet been peer reviewed. The per-visit table and all example outputs on this page are my own illustrations.</div>
+  <div class="note">This is an information note and a set of ideas, not a report of results. Nothing described here has been built or tested. Claims attributed to TypeSafe AI are the company's own and have not been independently verified. Accuracy, cost-per-judgment, latency, and cascade figures come from Li et al. (2026). The per-visit table and example outputs are my own illustrations.</div>
 
   <p class="sources">Li, Y., Miao, Y., Krishnan, R., &amp; Padman, R. (2026). <a href="https://arxiv.org/abs/2609.26550">JEV-as-a-Judge: Accept when confident, escalate when unsure</a>. arXiv:2609.26550.<br>
   Coverage: <a href="https://www.correlation-one.com/blog/what-is-an-ai-decision-model-jev-system-one-models-and-when-to-use-one-instead-of-an-llm-2026">Correlation One</a> · <a href="https://aiweekly.co/alerts/jev-judge-model-matches-llm-accuracy-at-036-of-the-cost">AI Weekly</a> · <a href="https://academy.dair.ai/papers/jev-as-a-judge-accept-when-confident-escalate-when-unsure-2609.26550">DAIR.AI Academy</a><br><br><a class="back" href="../#writing">← Back to writing</a></p>
