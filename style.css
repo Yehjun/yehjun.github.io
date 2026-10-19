@@ -136,3 +136,12 @@ a.inline{color:var(--ink);text-decoration-color:var(--accent);text-underline-off
 .post th{font:400 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
 .post .ctable table{font-size:13px}.post .ctable td{padding:6px 8px}
 .tablewrap{overflow-x:auto}
+.hero{display:grid;grid-template-columns:1.3fr .85fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(38px,5.4vw,58px)}
+.hero-photo{margin:0}
+.hero-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block}
+.talk-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.talk-photos img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:10px;display:block}
+.photo-cap{font:italic 400 15px Fraunces,serif;color:var(--soft);margin:10px 0 28px}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:32px}.hero-photo{max-width:420px}}
+@media (max-width:600px){.talk-photos{grid-template-columns:1fr 1fr}.talk-photos img:first-child{grid-column:1/-1}}
