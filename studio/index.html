@@ -59,6 +59,13 @@ details.all summary{cursor:pointer;font:400 12px "JetBrains Mono",monospace;lett
 .rline{stroke:var(--c2);stroke-width:2}
 .rsum{font-size:14px;color:var(--soft);margin:10px 0 0}
 .rsum b{color:var(--ink)}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:14px}
+.mini .mh{font:600 16px Inter,sans-serif;margin:0 0 4px}
+.mini .ms{font-size:13.5px;color:var(--soft);margin:0 0 10px;line-height:1.55}
+.mini svg{width:100%;height:auto;display:block}
+.mini .ml{font:500 12.5px Inter,sans-serif;fill:var(--ink)}
+.mini .mv{font:400 12px 'JetBrains Mono',monospace;fill:var(--soft)}
+.mini .mref .ml,.mini .mref .mv{fill:var(--faint)}
 </style>
 </head>
 <body>
@@ -111,7 +118,7 @@ const bar = (cls, frac) => `<div class="trk"><div class="fill ${cls}" style="wid
 const meters = c => `<div class="mt"><span>sensory fit</span>${bar("feel", (c.p + 1) / 2)}<span>${f2(c.p)}</span><span>message match</span>${bar("msg", c.s / 0.7)}<span>${c.s.toFixed(2)}</span></div>`;
 
 function build(d) {
-  const R = D.rule, C = d.idx.map(i => ({...B.lines[i]}));
+  const R = D.rule, C = d.idx.map(i => ({...B.lines[i], i}));
   const P = C.map(c => c.p), S = C.map(c => c.s), mp = mean(P), sp = sd(P), ms = mean(S), ss = sd(S);
   C.forEach(c => { const zp = (c.p - mp) / sp, zs = (c.s - ms) / ss;
     c.out = c.p < d.cut; c.ex = R.b_low * Math.min(zp, 0) + R.b_high * Math.max(zp, 0) + R.b_sem * zs; });
@@ -123,13 +130,14 @@ function render() {
   const nOut = C.filter(c => c.out).length;
   let h = `<p class="sum">Draw ${drawNo % B.draws.length + 1} of ${B.draws.length} · ${C.length} candidates · ${nOut} set aside for low sensory fit · <b>${P.length} kept</b>.</p><div class="cards">`;
   h += P.map(c => `<div class="pick"><div class="top"><span class="rk">${c.rank}</span><span class="ln">${esc(c.t)}</span><span class="gen">${GEN[c.g] || esc(c.g)}</span></div>${meters(c)}</div>`).join("");
-  h += `</div><details class="all"><summary>All ${C.length} candidates</summary><div class="tw"><table id="tbl"></table></div></details>`;
+  h += `</div>${mini(C)}<details class="all"><summary>All ${C.length} candidates</summary><div class="tw"><table id="tbl"></table></div></details>`;
   $("#out").innerHTML = h; table(C);
 }
 function table(C) {
-  const key = {feel: "p", message: "s"}[sortKey], rows = C.slice().sort((a, b) => b[key] - a[key]);
-  let h = `<tr><th></th><th>line</th><th data-k="feel">sensory fit</th><th data-k="message">message match</th></tr>`;
-  for (const c of rows) h += `<tr class="${c.out ? "out" : ""} ${c.rank ? "pk" : ""}"><td>${c.rank || (c.out ? "×" : "")}</td><td>${esc(c.t)} <span class="tag">${GEN[c.g] || esc(c.g)}</span></td><td class="n">${f2(c.p)}</td><td class="n">${c.s.toFixed(2)}</td></tr>`;
+  const ex = c => (LX && LX[B.id] ? LX[B.id][c.i] : null);
+  const val = {feel: c => c.p, message: c => c.s, rating: c => (ex(c) ? ex(c)[0] : -9)}[sortKey], rows = C.slice().sort((a, b) => val(b) - val(a));
+  let h = `<tr><th></th><th>line</th><th data-k="feel">sensory fit</th><th data-k="message">message match</th><th data-k="rating">rating</th></tr>`;
+  for (const c of rows) { const e = ex(c); h += `<tr class="${c.out ? "out" : ""} ${c.rank ? "pk" : ""}"><td>${c.rank || (c.out ? "×" : "")}</td><td>${esc(c.t)} <span class="tag">${GEN[c.g] || esc(c.g)}</span></td><td class="n">${f2(c.p)}</td><td class="n">${c.s.toFixed(2)}</td><td class="n">${e ? f2(e[0]) + (e[1] > 1 ? ` <span class="tag">×${e[1]}</span>` : "") : ""}</td></tr>`; }
   $("#tbl").innerHTML = h;
   document.querySelectorAll("#tbl th[data-k]").forEach(th => th.onclick = () => { sortKey = th.dataset.k; table(C); });
 }
@@ -137,6 +145,42 @@ function pickBrand() {
   B = D.briefs.find(b => b.id === $("#brand").value); drawNo = 0;
   $("#brief").textContent = `${B.brand}, ${B.category}: ${B.brief}`;
   $("#promise").innerHTML = `Promise every line makes: <b>${esc(B.promise)}</b>`;
+}
+
+// Mini regression on one draw: each of the 48 lines was rated in the study (relative to the rater's own average).
+let LX;
+function ols(X, y) {
+  const n = X.length, k = X[0].length, A = Array.from({ length: k }, () => Array(k + 1).fill(0));
+  for (let r = 0; r < n; r++) for (let i = 0; i < k; i++) { for (let j = 0; j < k; j++) A[i][j] += X[r][i] * X[r][j]; A[i][k] += X[r][i] * y[r]; }
+  const N = A.map((row, i) => row.slice(0, k).concat(Array.from({ length: k }, (_, j) => +(i === j))));
+  for (let c = 0; c < k; c++) { let p = c; for (let r = c + 1; r < k; r++) if (Math.abs(N[r][c]) > Math.abs(N[p][c])) p = r; [N[c], N[p]] = [N[p], N[c]];
+    const v = N[c][c]; for (let j = 0; j < 2 * k; j++) N[c][j] /= v;
+    for (let r = 0; r < k; r++) if (r !== c) { const f = N[r][c]; for (let j = 0; j < 2 * k; j++) N[r][j] -= f * N[c][j]; } }
+  const inv = N.map(row => row.slice(k)), b = inv.map(row => row.reduce((s, v, j) => s + v * A[j][k], 0));
+  let sse = 0; for (let r = 0; r < n; r++) { const e = y[r] - X[r].reduce((s, v, j) => s + v * b[j], 0); sse += e * e; }
+  const s2 = sse / (n - k), se = inv.map((row, i) => Math.sqrt(s2 * row[i])), t = 1.96 + 2.4 / (n - k);
+  return b.map((v, i) => ({ b: v, lo: v - t * se[i], hi: v + t * se[i] }));
+}
+function mini(C) {
+  if (!LX || !LX[B.id]) return '';
+  const rows = C.map(c => { const e = LX[B.id][c.i]; return { y: e[0], fit: e[5], mean: c.s, sieb: e[2], vader: e[3], len: e[4] }; });
+  const z = k => { const v = rows.map(r => r[k]), m = mean(v), s = sd(v); return v.map(x => (x - m) / s); };
+  const Z = { fit: z('fit'), mean: z('mean'), sieb: z('sieb'), vader: z('vader'), len: z('len') }, y = rows.map(r => r.y);
+  const fitRow = keys => ols(rows.map((_, r) => [1].concat(keys.map(k => Z[k][r]))), y);
+  const M = [['Sensory fit alone', ['fit']], ['+ message match', ['fit', 'mean']], ['+ sentiment (SiEBERT, VADER)', ['fit', 'mean', 'sieb', 'vader']], ['+ length', ['fit', 'mean', 'sieb', 'vader', 'len']]];
+  const res = M.map(m => ({ label: m[0], est: fitRow(m[1]) }));
+  const full = res[3].est, lad = res.map(r => ({ label: r.label, ...r.est[1] })).concat([{ label: 'Whole study (preregistered)', b: 0.192, lo: 0.121, hi: 0.263, ref: true }]);
+  const W = 640, rh = 30, L = 210, Rr = 170, H = lad.length * rh + 30, lo = Math.min(-1, ...lad.map(r => r.lo)), hi = Math.max(1, ...lad.map(r => r.hi));
+  const x = v => L + (v - lo) / (hi - lo) * (W - L - Rr);
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Sensory-fit coefficient as controls are added">`;
+  [-1, -0.5, 0, 0.5, 1].filter(t => t >= lo && t <= hi).forEach(t => { svg += `<line x1="${x(t)}" x2="${x(t)}" y1="4" y2="${H - 22}" class="${t === 0 ? 'czero' : 'cgrid'}"/><text x="${x(t)}" y="${H - 6}" class="ct" text-anchor="middle">${t === 0 ? '0' : f2(t)}</text>`; });
+  lad.forEach((r, i) => { const cy = 14 + i * rh;
+    svg += `<g class="${r.ref ? 'mref' : ''}"><text x="0" y="${cy + 4}" class="ml">${r.label}</text><line x1="${x(r.lo)}" x2="${x(r.hi)}" y1="${cy}" y2="${cy}" class="cci${r.ref ? ' m' : ''}"/><circle cx="${x(r.b)}" cy="${cy}" r="5" class="cdot${r.ref ? ' m' : ''}"/><text x="${W - Rr + 10}" y="${cy + 4}" class="mv">${f2(r.b)} [${f2(r.lo)}, ${f2(r.hi)}]</text></g>`; });
+  svg += '</svg>';
+  const nm = ['message match', 'SiEBERT', 'VADER', 'length'];
+  return `<div class="mini"><div class="mh">This draw's ${C.length} lines, as people actually rated them</div>` +
+    `<p class="ms">Every line in this draw was rated in the study. Below: the regression of those ratings (relative to each rater's own average) on sensory fit, standardized within the draw, adding controls one at a time; points per SD of fit with 95% intervals.</p>${svg}` +
+    `<p class="ms">Full model, other terms: ${nm.map((n, i) => `${n} ${f2(full[i + 2].b)}`).join(' · ')}. With only ${C.length} lines, each rated once or a few times, one draw is noisy; the whole-study estimate is the reference. Exploratory.</p></div>`;
 }
 
 // Real responses for the selected brand: each dot is one slogan rated by one person, relative to that person's own average.
@@ -186,6 +230,7 @@ fetch("studio-data.json").then(r => r.json()).then(j => {
   $("#again").onclick = () => { drawNo += 1; render(); };
   pickBrand(); render();
   fetch("s9-ratings.json").then(r => r.json()).then(j => { RT = j; rated(); });
+  fetch("s9-lines.json").then(r => r.json()).then(j => { LX = j; render(); });
 }).catch(() => { $("#out").innerHTML = `<p class="empty">The study data could not be loaded. Please reload the page.</p>`; });
 </script>
 </body>
