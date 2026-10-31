@@ -167,3 +167,6 @@ a.inline{color:var(--ink);text-decoration-color:var(--accent);text-underline-off
 .writing a.entry{padding:16px 0}
 .writing a.entry h3{margin:4px 0 0}
 @media (max-width:600px){.pts li{grid-template-columns:1fr;gap:2px}}
+
+.spot{margin-top:30px;padding:20px 22px;background:var(--card);border:1px solid var(--line);border-radius:14px}.spot .tag{margin-bottom:8px}.spot h3{margin-bottom:6px}.spot p{font-size:15.5px}.spot .meta{margin-top:12px}
+@media (min-width:760px){#built .grid{grid-template-columns:1fr 1fr}}
