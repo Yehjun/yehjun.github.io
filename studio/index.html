@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Slogan Studio — Yeh Jun Lee</title>
-<meta name="description" content="Replay AI-written slogan candidates from a preregistered study and see which ones fit a brand's feel.">
+<meta name="description" content="Replay AI-written slogan candidates from a preregistered study and see how a screening rule based on sensory fit ranks them.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
@@ -31,7 +31,7 @@
 .pick .rk{font:600 18px Fraunces,serif;color:var(--accent);min-width:18px}
 .pick .ln{font:600 18px/1.35 Fraunces,serif;flex:1}
 .pick .gen{font:400 11px "JetBrains Mono",monospace;color:var(--faint);letter-spacing:.06em;text-transform:uppercase}
-.mt{display:grid;grid-template-columns:64px 1fr;gap:4px 10px;align-items:center;margin:10px 0 0 30px;max-width:380px;font:400 11px "JetBrains Mono",monospace;color:var(--faint);letter-spacing:.04em}
+.mt{display:grid;grid-template-columns:104px 1fr 48px;gap:4px 10px;align-items:center;margin:10px 0 0 30px;max-width:380px;font:400 11px "JetBrains Mono",monospace;color:var(--faint);letter-spacing:.04em}
 .trk{height:7px;border-radius:4px;background:var(--line);position:relative;overflow:hidden}
 .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
 .fill.feel{background:var(--c2)}.fill.msg{background:var(--c1)}
@@ -57,8 +57,8 @@ details.all summary{cursor:pointer;font:400 12px "JetBrains Mono",monospace;lett
 
 <div class="wrap studio">
   <p class="kicker">Demo · Slogan Studio</p>
-  <h1>Which AI-written line fits the brand?</h1>
-  <p class="dek">Pick a brand from the study, draw 48 slogans that Claude, GPT, and Gemini wrote for it, and see which lines the study's rule keeps: set aside the ones that feel least like the brand, then pick for message.</p>
+  <h1>Screening AI-written slogans by sensory fit</h1>
+  <p class="dek">In my experiment, Claude, GPT, and Gemini wrote slogans for 20 fictitious brands, all making the same brand promise. Each slogan has two scores: <b>sensory fit</b>, how similar its profile on 45 sensory rating scales is to the brand brief's, and <b>message match</b>, how similar its meaning is to the brief. Draw 48 of them and see which five the study's rule keeps.</p>
 
   <div class="lay">
     <div class="pane">
@@ -72,7 +72,7 @@ details.all summary{cursor:pointer;font:400 12px "JetBrains Mono",monospace;lett
     <div id="out"><p class="empty">Loading the study's candidate lines…</p></div>
   </div>
 
-  <p class="fine">These are real candidates that three AI models wrote live for participants in the study. Each draw replays 48 of them; the demo calls no model. Feel = how closely a line's sensory coloring matches the brief's. Message = how closely its meaning matches the brief. Estimates come from exploratory models of the study data, relative to the average candidate on a 1–7 attitude scale. <a class="inline" href="../writing/slogan-study.html">Read about the study →</a></p>
+  <p class="fine">These are real candidates that three AI models wrote live for participants in the study. Each draw replays 48 of them; the demo calls no model. Sensory fit is the cosine similarity of the slogan's and the brief's profiles (−1 to 1); message match is the cosine similarity of their text embeddings. Estimates come from exploratory models of the study data, relative to the average candidate on a 1–7 attitude scale. <a class="inline" href="../writing/slogan-study.html">Read about the study →</a></p>
 </div>
 
 <footer><div class="wrap">Yeh Jun Lee · <a class="inline" href="mailto:yehjun@vt.edu">yehjun@vt.edu</a> · <a class="inline" href="../">Home</a></div></footer>
@@ -87,7 +87,7 @@ let D, B, drawNo = 0, sortKey = "feel";
 const mean = a => a.reduce((s, x) => s + x, 0) / Math.max(1, a.length);
 const sd = a => { const m = mean(a); return Math.sqrt(mean(a.map(x => (x - m) ** 2))) || 1; };
 const bar = (cls, frac) => `<div class="trk"><div class="fill ${cls}" style="width:${Math.max(2, Math.min(100, frac * 100)).toFixed(0)}%"></div></div>`;
-const meters = c => `<div class="mt"><span>feel</span>${bar("feel", (c.p + 1) / 2)}<span>message</span>${bar("msg", c.s / 0.7)}</div>`;
+const meters = c => `<div class="mt"><span>sensory fit</span>${bar("feel", (c.p + 1) / 2)}<span>${f2(c.p)}</span><span>message match</span>${bar("msg", c.s / 0.7)}<span>${c.s.toFixed(2)}</span></div>`;
 
 function build(d) {
   const R = D.rule, C = d.idx.map(i => ({...B.lines[i]}));
@@ -97,19 +97,17 @@ function build(d) {
   d.picked.forEach((i, r) => { C[i].rank = r + 1; });
   return C;
 }
-function chip(c) { const a = c.ax.slice().sort((x, y) => Math.abs(y[1]) - Math.abs(x[1]))[0];
-  return `<span class="chip">${a[1] >= 0 ? "agrees" : "clashes"} with the brand on ${esc(a[0])}</span>`; }
 function render() {
   const d = B.draws[drawNo % B.draws.length], C = build(d), P = d.picked.map(i => C[i]);
   const exP = mean(P.map(c => c.ex)), exO = mean(C.filter(c => c.out).map(c => c.ex)), nOut = C.filter(c => c.out).length;
-  let h = `<p class="sum">Draw ${drawNo % B.draws.length + 1} of ${B.draws.length} · ${C.length} candidates · ${nOut} set aside for feel. Estimated attitude vs. the average candidate: picks <b>${f2(exP)}</b>, set aside <b>${f2(exO)}</b>.</p><div class="cards">`;
-  h += P.map(c => `<div class="pick"><div class="top"><span class="rk">${c.rank}</span><span class="ln">${esc(c.t)}</span><span class="gen">${GEN[c.g] || esc(c.g)}</span></div>${meters(c)}${chip(c)}</div>`).join("");
+  let h = `<p class="sum">Draw ${drawNo % B.draws.length + 1} of ${B.draws.length} · ${C.length} candidates · ${nOut} set aside for low sensory fit. Estimated attitude vs. the average candidate: picks <b>${f2(exP)}</b>, set aside <b>${f2(exO)}</b>.</p><div class="cards">`;
+  h += P.map(c => `<div class="pick"><div class="top"><span class="rk">${c.rank}</span><span class="ln">${esc(c.t)}</span><span class="gen">${GEN[c.g] || esc(c.g)}</span></div>${meters(c)}</div>`).join("");
   h += `</div><details class="all"><summary>All ${C.length} candidates</summary><div class="tw"><table id="tbl"></table></div></details>`;
   $("#out").innerHTML = h; table(C);
 }
 function table(C) {
   const key = {feel: "p", message: "s"}[sortKey], rows = C.slice().sort((a, b) => b[key] - a[key]);
-  let h = `<tr><th></th><th>line</th><th data-k="feel">feel</th><th data-k="message">message</th></tr>`;
+  let h = `<tr><th></th><th>line</th><th data-k="feel">sensory fit</th><th data-k="message">message match</th></tr>`;
   for (const c of rows) h += `<tr class="${c.out ? "out" : ""} ${c.rank ? "pk" : ""}"><td>${c.rank || (c.out ? "×" : "")}</td><td>${esc(c.t)} <span class="tag">${GEN[c.g] || esc(c.g)}</span></td><td class="n">${f2(c.p)}</td><td class="n">${c.s.toFixed(2)}</td></tr>`;
   $("#tbl").innerHTML = h;
   document.querySelectorAll("#tbl th[data-k]").forEach(th => th.onclick = () => { sortKey = th.dataset.k; table(C); });
@@ -122,7 +120,7 @@ function pickBrand() {
 fetch("studio-data.json").then(r => r.json()).then(j => {
   D = j; const R = D.rule;
   for (const b of D.briefs) $("#brand").insertAdjacentHTML("beforeend", `<option value="${b.id}">${esc(b.brand)} — ${esc(b.category)}</option>`);
-  $("#rule").textContent = `The rule, fixed from the study: set aside the ${Math.round(R.screen_frac * 100)}% of candidates that feel least like the brand, rank the rest by message, and keep ${R.k}, at most ${R.cap_per_gen} per model.`;
+  $("#rule").textContent = `The rule, fixed from the study: set aside the ${Math.round(R.screen_frac * 100)}% of candidates lowest in sensory fit, rank the rest by message match, and keep ${R.k}, at most ${R.cap_per_gen} per model.`;
   $("#brand").onchange = () => { pickBrand(); render(); };
   $("#draw").onclick = () => { render(); };
   $("#again").onclick = () => { drawNo += 1; render(); };

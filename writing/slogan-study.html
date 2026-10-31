@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Same promise, different feel — Yeh Jun Lee</title>
-<meta name="description" content="In a preregistered experiment, AI models wrote slogans live for each participant. Among lines making the same promise, people preferred the ones whose sensory feel fit the brand.">
+<title>The sensory side of AI-written slogans — Yeh Jun Lee</title>
+<meta name="description" content="Words carry sensory associations as well as meaning. In a preregistered experiment, slogans that AI wrote on the spot were rated higher when their sensory profile matched the brand's, with message and sentiment held constant.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
 .post p.stat{font:400 13px "JetBrains Mono",monospace;color:var(--soft);margin:0 0 26px}
-.pairs-t td:nth-child(2){color:var(--c2);font-weight:500}
-.pairs-t td small{display:block;color:var(--faint);font-size:12.5px;font-weight:400;margin-top:2px}
+.checks{list-style:none;padding:0!important;margin:0 0 26px!important;border-top:1px solid var(--line)}
+.checks li{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:16px!important;margin:0!important}
+.checks li b{font:400 12px/1.6 "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+@media (max-width:560px){.checks li{grid-template-columns:1fr;gap:4px}}
+.fig .one{max-width:60%;margin:0 auto}
 .try{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:34px 0}
 .try p{margin:0!important;font-size:16px!important;color:var(--soft)}
 .try b{display:block;font:600 20px Fraunces,serif;color:var(--ink);margin-bottom:2px}
@@ -26,72 +29,79 @@
 <div class="wrap"><article class="post">
   <a class="back" href="../#writing">← Writing</a>
   <p class="kicker" style="margin-top:28px">Research note · Job market paper</p>
-  <h1>Same promise, different feel</h1>
-  <p class="dek">Two AI-written slogans can make the same promise and still feel different: one bright and warm, the other dry and cool. In a preregistered experiment, AI models wrote slogans live for each participant, and people preferred the lines whose feel fit the brand.</p>
-  <p class="byline">Yeh Jun Lee · October 2026 · 6 min read</p>
+  <h1>The sensory side of AI-written slogans</h1>
+  <p class="dek">Words carry sensory associations as well as meaning. In a preregistered experiment, slogans that AI wrote on the spot were rated higher when their sensory profile matched the brand's, with message and sentiment held constant.</p>
+  <p class="byline">Yeh Jun Lee · October 2026 · 7 min read</p>
 
-  <h2>A layer the usual metrics miss</h2>
+  <h2>Meaning has a sensory side</h2>
 
-  <p>Anyone who uses language models has noticed it: two answers can say the same thing and still feel different. I call this layer <em>sensory coloring</em>, how bright or dark, warm or cool, round or angular a line feels, apart from what it says and how positive it sounds. It builds on embodied cognition and crossmodal correspondence: we learn words through our senses, so meanings carry traces of perception.</p>
+  <p>Psychologists have long measured more than what words denote. Osgood's semantic differential showed that words carry connotations people agree on, such as how good, strong, or active something seems. Research on crossmodal correspondence shows that people match features across the senses in shared ways: across many languages, a spiky shape is called <em>kiki</em> and a rounded one <em>bouba</em>, and higher-pitched sounds go with brighter colors. In marketing, the sounds of a brand name shape what people infer about the product.</p>
 
-  <p>Coloring is too subtle to rate by hand at scale, so I measure it with a language-model instrument. On 80 concepts chosen to span each sensory axis, its readings track averaged human ratings at <em>r</em> = .80. The open question was whether the much subtler differences between lines that make the same promise matter to people at all.</p>
+  <p>My job market paper builds on this work. Beyond brand names, ordinary words and whole phrases evoke shared sensory associations, such as how dark or bright, warm or cool, or round or angular something seems, and these associations can be measured. Users of language models notice a version of this: two answers can say the same thing, yet one reads warm and the other dry.</p>
+
+  <h2>Measuring it</h2>
+
+  <p>These associations are hard to collect from people at scale, because a stable reading of even one word takes many raters. I therefore prompt a language model to rate a text on 45 sensory scales (dark, bright, warm, cool, round, angular, and so on); the 45 ratings form the text's <em>sensory profile</em>. I validate these scores against human ratings and against outcomes the model never sees:</p>
+
+  <ul class="checks">
+    <li><b>Human ratings</b><span>On 80 concepts chosen to span the scales, the instrument's profiles track averaged human ratings at <em>r</em> = .80.</span></li>
+    <li><b>Blind images</b><span>Images generated only from a concept's profile, without its name, were matched by people to the right concept above chance in 26 of 28 comparisons.</span></li>
+  </ul>
+
+  <figure class="fig">
+    <div class="row one"><img src="../img/simsang/kiki.jpg" alt="Image generated from the sensory profile of the word kiki: angular"><img src="../img/simsang/bouba.jpg" alt="Image generated from the sensory profile of the word bouba: rounded"></div>
+    <figcaption>An illustration, not a test: images generated from the instrument's profiles of <em>kiki</em> (left) and <em>bouba</em> (right) come out angular and rounded, as the classic correspondence predicts.</figcaption>
+  </figure>
 
   <h2>The experiment</h2>
 
+  <p>The question was whether people respond to these associations in a single line of copy, where the differences are much subtler than between <em>kiki</em> and <em>bouba</em>.</p>
+
   <ol>
-    <li>Each participant saw three fictitious brands, each with a short brief, such as Nookettle, "a neighbourhood cafe that feels like a friend's kitchen."</li>
+    <li>Each participant saw three of 20 fictitious brands, each described in a short brief (for example, a neighbourhood cafe "that feels like a friend's kitchen").</li>
     <li>For each brand, three frontier models (Claude, GPT, and Gemini) wrote 48 slogans on the spot, all making the same brand promise.</li>
-    <li>While the participant read the instructions, my pipeline read every line on 45 sensory items, in about half a minute per brand, and scored how closely its feel matched the brief's.</li>
-    <li>Eight lines, spread from the least to the most fitting, were shown in random order, and the participant rated each one.</li>
+    <li>Within about half a minute, the pipeline scored every slogan and the brief on the 45 scales. A slogan's <em>sensory fit</em> is the cosine similarity between its sensory profile and the brief's.</li>
+    <li>Eight slogans, spread from the lowest to the highest fit, were shown in random order, and the participant rated each one.</li>
   </ol>
 
-  <p>Many consumer studies test a handful of hand-written stimuli, so a result can reflect those stimuli rather than the theory. Here every participant saw lines written for them moments earlier.</p>
+  <p>Generating fresh slogans for every participant reduces the risk that the result reflects a few hand-picked stimuli.</p>
 
   <h2>What happened</h2>
 
   <p class="stat">Preregistered test · 153 participants · 3,672 ratings</p>
 
-  <p>Lines whose feel fit the brand were rated more favorably: +.19 points of brand attitude per standard deviation of fit (95% CI .12 to .26, <em>p</em> &lt; .001), controlling for how closely each line matched the brand's message, its sentiment, and word-level features such as length and word frequency.</p>
+  <p>Slogans with higher sensory fit were rated more favorably: +.19 points on a 7-point brand-attitude scale per standard deviation of fit (95% CI .12 to .26, <em>p</em> &lt; .001). The model controlled for how closely each slogan matched the brand's message, its sentiment, and word-level features such as length and word frequency. Judged fit with the brand rose in the same way.</p>
 
   <figure class="chart" id="ch-rank">
-    <p class="ctitle">Attitude by how well a line's feel fit the brand</p>
-    <p class="csub">Each person's eight lines ranked from least (1) to most (8) fitting. Points show attitude relative to that person's own average, with 95% intervals.</p>
-    <figcaption>Exploratory breakdown of the same data; each point averages 459 lists (153 people × 3 brands). The loss sits at the low end: the lines that fit least were the ones people liked least.</figcaption>
+    <p class="ctitle">Attitude by sensory-fit rank within a list</p>
+    <p class="csub">Each person's eight slogans ranked from lowest (1) to highest (8) sensory fit. Points show attitude relative to that person's own average, with 95% intervals.</p>
+    <figcaption>Exploratory breakdown of the same data; each point averages 459 lists (153 people × 3 brands). The slogan with the lowest fit was rated about half a point below the person's average.</figcaption>
   </figure>
 
-  <h2>Same message, different feel</h2>
+  <h2>Why single examples don't settle it</h2>
 
-  <p>The cleanest comparison holds the message fixed. Within the same person's list, I took pairs of positively worded lines that matched the brand's message almost equally but differed clearly in feel. The line that felt like the brand won 6 in 10 decided pairs (343 pairs from 132 people; +.30 points on average, 95% CI .04 to .57; exploratory).</p>
+  <p>Single ratings are noisy, and any one pair of slogans can look like a matter of taste. The preference appears consistently once thousands of ratings are pooled. That is why the measure needs to be automated: it can score every candidate in seconds, which no panel of raters can do for copy that AI writes on demand.</p>
 
-  <div class="tablewrap"><table class="pairs-t">
-    <tr><th>Brand</th><th>Fits the feel</th><th>Misses the feel</th></tr>
-    <tr><td>Nookettle<small>a cafe that feels like a friend's kitchen</small></td><td>"No rush, just good company."</td><td>"Knock once. Walk right in."</td></tr>
-    <tr><td>Everkind<small>a veterinary hospital for elderly pets</small></td><td>"Age happens. We care gently and talk straight."</td><td>"Good news, hard news, always straight."</td></tr>
-    <tr><td>Emberfell<small>a mountain lodge with a fire in every room</small></td><td>"Burn slow. Eat long. Sleep deep."</td><td>"Sleep like the snow is holding its breath."</td></tr>
-  </table></div>
+  <h2>What it means for brands using AI</h2>
 
-  <p>In each pair, both lines match the brand's message about equally. What separates them is how they feel.</p>
-
-  <h2>What it means</h2>
-
-  <p>When a brand lets AI write its copy, it is already choosing a coloring, usually without measuring it. The result points to a simple guard: generate many candidates, set aside the lines that feel least like the brand, and then pick for message. People respond to the coloring of a single line.</p>
+  <p>AI-written copy evokes sensory associations whether or not anyone checks them. The results suggest a screening step before audience testing: generate many candidates, set aside those lowest in sensory fit, and then choose on message. The final choice should still be validated with the actual audience.</p>
 
   <div class="try">
-    <p><b>Slogan Studio</b>Replay the study's AI-written candidates for any of its 20 brands and see which lines the rule keeps.</p>
+    <p><b>Slogan Studio</b>Replay the study's AI-written candidates for any of its 20 brands and see how the screening rule ranks them.</p>
     <a class="btn solid" href="../studio/">Try the demo →</a>
   </div>
 
-  <div class="note">This note describes a study from my job market paper (sole-authored, targeted to the <em>Journal of Marketing</em>). The first test above was preregistered; the breakdowns after it are exploratory. All brands are fictitious. Questions and collaboration ideas are welcome: <a href="mailto:yehjun@vt.edu">yehjun@vt.edu</a>.</div>
+  <div class="note">This note describes a study from my job market paper (sole-authored, targeted to the <em>Journal of Marketing</em>). The first test above was preregistered; the breakdown after it is exploratory. All brands are fictitious. Questions and collaboration ideas are welcome: <a href="mailto:yehjun@vt.edu">yehjun@vt.edu</a>.</div>
 
-  <p class="sources"><a class="back" href="../#writing">← Back to writing</a></p>
+  <p class="sources">References: Osgood, C. E., Suci, G. J., &amp; Tannenbaum, P. H. (1957). <em>The measurement of meaning</em>. University of Illinois Press. · Ramachandran, V. S., &amp; Hubbard, E. M. (2001). Synaesthesia: A window into perception, thought and language. <em>Journal of Consciousness Studies</em>, 8(12), 3–34. · Ćwiek, A., et al. (2022). The bouba/kiki effect is robust across cultures and writing systems. <em>Philosophical Transactions of the Royal Society B</em>, 377(1841), 20200390. ·Spence, C. (2011). Crossmodal correspondences: A tutorial review. <em>Attention, Perception, &amp; Psychophysics</em>, 73(4), 971–995. · Klink, R. R. (2000). Creating brand names with meaning: The use of sound symbolism. <em>Marketing Letters</em>, 11(1), 5–20. · Yorkston, E., &amp; Menon, G. (2004). A sound idea: Phonetic effects of brand names on consumer judgments. <em>Journal of Consumer Research</em>, 31(1), 43–51.<br><br><a class="back" href="../#writing">← Back to writing</a></p>
 </article></div>
 <script src="../js/charts.js"></script>
 <script>
-const f2 = v => (v >= 0 ? '+' : '') + v.toFixed(2);
+const f2 = v => (Math.abs(v) < 0.005 ? '0' : (v > 0 ? '+' : '−') + Math.abs(v).toFixed(2));
 const R = [[-0.494,-0.622,-0.37],[-0.159,-0.271,-0.03],[-0.13,-0.253,-0.009],[0.201,0.08,0.315],[0.127,0.014,0.243],[0.116,0.009,0.219],[0.122,0.011,0.237],[0.218,0.111,0.327]];
 Charts.band(document.getElementById('ch-rank'), {
-  xlab: 'fit rank within the list (1 = least fitting, 8 = most)', ylab: 'attitude vs. own average', fmt: f2,
-  xname: x => 'Rank ' + x + (x === 1 ? ' (least fitting)' : x === 8 ? ' (most fitting)' : ''),
+  xlab: 'sensory-fit rank within the list (1 = lowest, 8 = highest)', ylab: 'attitude vs. own average', fmt: f2,
+  xname: x => 'Rank ' + x + (x === 1 ? ' (lowest fit)' : x === 8 ? ' (highest fit)' : ''),
   pts: R.map((r, i) => ({x: i + 1, y: r[0], lo: r[1], hi: r[2]})),
   ymin: -0.7, ymax: 0.4, yticks: [-0.6, -0.4, -0.2, 0, 0.2, 0.4],
   xticks: [1,2,3,4,5,6,7,8].map(v => ({v, l: String(v)}))
