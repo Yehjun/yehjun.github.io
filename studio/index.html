@@ -47,6 +47,18 @@ details.all summary{cursor:pointer;font:400 12px "JetBrains Mono",monospace;lett
 .tw tr.pk td:first-child{color:var(--accent);font-weight:600}
 .fine{font-size:13px;color:var(--faint);margin-top:16px;line-height:1.6}
 .empty{color:var(--soft);font-size:15px}
+.finding{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c1);border-radius:12px;padding:14px 18px;margin:0 0 26px;font-size:15px;color:var(--soft);max-width:820px}
+.finding b{color:var(--ink)}
+.rated{margin-top:40px}
+.rated h2{font:600 26px Fraunces,serif;margin:0 0 6px}
+.rated .lead{font-size:15px;color:var(--soft);margin:0 0 14px;max-width:820px}
+.rated svg{width:100%;height:auto;display:block;overflow:visible}
+.rdot{fill:var(--c1);opacity:.28}
+.rdot.on{opacity:1}
+.rbin{fill:var(--c2);stroke:var(--card);stroke-width:2}
+.rline{stroke:var(--c2);stroke-width:2}
+.rsum{font-size:14px;color:var(--soft);margin:10px 0 0}
+.rsum b{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -60,6 +72,8 @@ details.all summary{cursor:pointer;font:400 12px "JetBrains Mono",monospace;lett
   <h1>Screening AI-written slogans by sensory fit</h1>
   <p class="dek">In my experiment, Claude, GPT, and Gemini wrote slogans for 20 fictitious brands, all making the same brand promise. Each slogan has two scores: <b>sensory fit</b>, how similar its profile on 45 sensory rating scales is to the brand brief's, and <b>message match</b>, how similar its meaning is to the brief. Draw 48 of them and see which five the study's rule keeps.</p>
 
+  <div class="finding" id="finding"><b>What the study found.</b> 153 people rated 3,672 of these AI-written slogans, eight per brand, mixed in random order. Slogans higher in sensory fit were rated more favorably: +.19 points on a 7-point scale per standard deviation of fit (95% CI .12 to .26), beyond message match, sentiment and word features. One draw of candidates is only an illustration of how the screening rule works; the evidence is the pooled data, shown for each brand below the candidates.</div>
+
   <div class="lay">
     <div class="pane">
       <label for="brand">Brand from the study</label>
@@ -72,7 +86,14 @@ details.all summary{cursor:pointer;font:400 12px "JetBrains Mono",monospace;lett
     <div id="out"><p class="empty">Loading the study's candidate lines…</p></div>
   </div>
 
-  <p class="fine">These are real candidates that three AI models wrote live for participants in the study. Each draw replays 48 of them; the demo calls no model. Sensory fit is the cosine similarity of the slogan's and the brief's profiles (−1 to 1); message match is the cosine similarity of their text embeddings. Estimates come from exploratory models of the study data, relative to the average candidate on a 1–7 attitude scale. <a class="inline" href="../writing/slogan-study.html">Read about the study →</a></p>
+  <section class="rated">
+    <h2 id="rtitle">What people actually rated</h2>
+    <p class="lead" id="rlead"></p>
+    <div id="rchart"></div>
+    <p class="rsum" id="rsum"></p>
+  </section>
+
+  <p class="fine">The candidates are real lines that three AI models wrote live for participants in the study; each draw replays 48 of them, and the demo calls no model. Sensory fit is the cosine similarity of the slogan's and the brief's profiles (−1 to 1); message match is the cosine similarity of their text embeddings. The ratings chart shows the study's de-identified responses, each relative to the rater's own average; each slogan was rated by one person, and the per-brand breakdown is exploratory. <a class="inline" href="../writing/slogan-study.html">Read about the study →</a></p>
 </div>
 
 <footer><div class="wrap">Yeh Jun Lee · <a class="inline" href="mailto:yehjun@vt.edu">yehjun@vt.edu</a> · <a class="inline" href="../">Home</a></div></footer>
@@ -99,8 +120,8 @@ function build(d) {
 }
 function render() {
   const d = B.draws[drawNo % B.draws.length], C = build(d), P = d.picked.map(i => C[i]);
-  const exP = mean(P.map(c => c.ex)), exO = mean(C.filter(c => c.out).map(c => c.ex)), nOut = C.filter(c => c.out).length;
-  let h = `<p class="sum">Draw ${drawNo % B.draws.length + 1} of ${B.draws.length} · ${C.length} candidates · ${nOut} set aside for low sensory fit. Estimated attitude vs. the average candidate: picks <b>${f2(exP)}</b>, set aside <b>${f2(exO)}</b>.</p><div class="cards">`;
+  const nOut = C.filter(c => c.out).length;
+  let h = `<p class="sum">Draw ${drawNo % B.draws.length + 1} of ${B.draws.length} · ${C.length} candidates · ${nOut} set aside for low sensory fit · <b>${P.length} kept</b>.</p><div class="cards">`;
   h += P.map(c => `<div class="pick"><div class="top"><span class="rk">${c.rank}</span><span class="ln">${esc(c.t)}</span><span class="gen">${GEN[c.g] || esc(c.g)}</span></div>${meters(c)}</div>`).join("");
   h += `</div><details class="all"><summary>All ${C.length} candidates</summary><div class="tw"><table id="tbl"></table></div></details>`;
   $("#out").innerHTML = h; table(C);
@@ -117,14 +138,54 @@ function pickBrand() {
   $("#brief").textContent = `${B.brand}, ${B.category}: ${B.brief}`;
   $("#promise").innerHTML = `Promise every line makes: <b>${esc(B.promise)}</b>`;
 }
+
+// Real responses for the selected brand: each dot is one slogan rated by one person, relative to that person's own average.
+let RT, tipEl;
+const NS = 'http://www.w3.org/2000/svg';
+const sv = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+function tip(e, html) {
+  if (!tipEl) { tipEl = document.createElement('div'); tipEl.className = 'ctip'; document.body.appendChild(tipEl); }
+  tipEl.innerHTML = html; tipEl.style.display = 'block';
+  const w = tipEl.offsetWidth, hh = tipEl.offsetHeight; let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + w > innerWidth - 8) x = e.clientX - w - 14; if (y + hh > innerHeight - 8) y = e.clientY - hh - 14;
+  tipEl.style.left = x + 'px'; tipEl.style.top = y + 'px';
+}
+function rated() {
+  if (!RT || !B) return;
+  const R = RT.brands[B.id]; if (!R) return;
+  $("#rtitle").textContent = `What people actually rated for ${B.brand}`;
+  $("#rlead").textContent = `Every ${B.brand} slogan shown to participants: ${R.n} slogans from ${R.lists} people, each rated once. Each dot is one rating, placed by the slogan's sensory fit and shown relative to that person's average over their eight slogans. Single ratings are noisy; the orange points average each fifth of the range.`;
+  const W = 640, H = 300, L = 48, Rr = 16, T = 14, Bt = 44;
+  const xs = R.pts.map(p => p[0]), ys = R.pts.map(p => p[1]), x0 = Math.min(...xs) - 0.05, x1 = Math.max(...xs) + 0.05, y0 = Math.min(-3, Math.floor(Math.min(...ys))) - 0.4, y1 = Math.max(3, Math.ceil(Math.max(...ys))) + 0.4;
+  const x = v => L + (v - x0) / (x1 - x0) * (W - L - Rr), y = v => H - Bt - (v - y0) / (y1 - y0) * (H - T - Bt);
+  const host = $("#rchart"); host.innerHTML = '';
+  const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Ratings by sensory fit' }, host);
+  Array.from({ length: Math.floor(y1) - Math.ceil(y0) + 1 }, (_, i) => Math.ceil(y0) + i).forEach(t => { sv('line', { x1: L, x2: W - Rr, y1: y(t), y2: y(t), class: t === 0 ? 'czero' : 'cgrid' }, svg); const tx = sv('text', { x: L - 8, y: y(t) + 4, class: 'ct', 'text-anchor': 'end' }, svg); tx.textContent = t > 0 ? '+' + t : (t < 0 ? '−' + (-t) : '0'); });
+  const step = (x1 - x0) > 1 ? 0.25 : 0.1;
+  for (let t = Math.ceil(x0 / step) * step; t <= x1 + 1e-9; t += step) { const tx = sv('text', { x: x(t), y: H - Bt + 18, class: 'ct', 'text-anchor': 'middle' }, svg); tx.textContent = t.toFixed(2).replace('-', '−'); }
+  const lab = sv('text', { x: (L + W - Rr) / 2, y: H - 6, class: 'cs', 'text-anchor': 'middle' }, svg); lab.textContent = 'sensory fit of the slogan to the brief (cosine)';
+  R.pts.forEach(p => {
+    const jy = p[1] + (((p[0] * 1000) % 7) - 3) * 0.02;
+    const c = sv('circle', { cx: x(p[0]), cy: y(jy), r: 4, class: 'rdot' }, svg);
+    c.addEventListener('mousemove', e => { c.classList.add('on'); tip(e, `<b>${esc(p[3])}</b><br>${RT.gens[p[2]] || ''} · sensory fit ${p[0].toFixed(2)}<br>rated ${f2(p[1])} vs. this person's average`); });
+    c.addEventListener('mouseleave', () => { c.classList.remove('on'); if (tipEl) tipEl.style.display = 'none'; });
+  });
+  const m = R.bins.reduce((a, b) => a + b[1] * b[2], 0) / R.bins.reduce((a, b) => a + b[2], 0), mx = R.bins.reduce((a, b) => a + b[0] * b[2], 0) / R.bins.reduce((a, b) => a + b[2], 0);
+  sv('line', { x1: x(x0 + 0.03), x2: x(x1 - 0.03), y1: y(m + R.slope * (x0 + 0.03 - mx)), y2: y(m + R.slope * (x1 - 0.03 - mx)), class: 'rline' }, svg);
+  R.bins.forEach(b => sv('circle', { cx: x(b[0]), cy: y(b[1]), r: 7, class: 'rbin' }, svg));
+  const lo = R.bins[0], hi = R.bins[R.bins.length - 1];
+  $("#rsum").innerHTML = `Lowest-fit fifth: <b>${f2(lo[1])}</b> vs. the rater's average · highest-fit fifth: <b>${f2(hi[1])}</b>. ` +
+    (R.slope > 0 ? `For ${B.brand}, higher-fit slogans were rated higher.` : `For ${B.brand}, the pattern runs the other way; it is one of the 2 brands out of 20 where it did.`);
+}
 fetch("studio-data.json").then(r => r.json()).then(j => {
   D = j; const R = D.rule;
   for (const b of D.briefs) $("#brand").insertAdjacentHTML("beforeend", `<option value="${b.id}">${esc(b.brand)} — ${esc(b.category)}</option>`);
   $("#rule").textContent = `The rule, fixed from the study: set aside the ${Math.round(R.screen_frac * 100)}% of candidates lowest in sensory fit, rank the rest by message match, and keep ${R.k}, at most ${R.cap_per_gen} per model.`;
-  $("#brand").onchange = () => { pickBrand(); render(); };
+  $("#brand").onchange = () => { pickBrand(); render(); rated(); };
   $("#draw").onclick = () => { render(); };
   $("#again").onclick = () => { drawNo += 1; render(); };
   pickBrand(); render();
+  fetch("s9-ratings.json").then(r => r.json()).then(j => { RT = j; rated(); });
 }).catch(() => { $("#out").innerHTML = `<p class="empty">The study data could not be loaded. Please reload the page.</p>`; });
 </script>
 </body>

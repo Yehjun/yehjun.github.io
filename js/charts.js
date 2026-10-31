@@ -1,5 +1,5 @@
 // Small SVG charts for the writing pages: hover tooltips, a table view, and
-// colors from CSS tokens (--c1 / --c2) so dark mode picks its own steps.
+// colors from CSS tokens (--c1 / --c2).
 (function () {
   const NS = 'http://www.w3.org/2000/svg';
   function el(tag, attrs, parent) {
@@ -81,15 +81,15 @@
     table(fig, ['Panel', 'Group', 'Value'], rows);
   }
 
-  // Coefficient plot. spec: {min, max, ticks, rows:[{label, est, lo, hi, sub, muted}]}
+  // Coefficient plot. spec: {min, max, ticks, rowH, left, rows:[{label, est, lo, hi, sub, muted}]}
   function forest(fig, spec) {
     const b = body(fig);
-    const W = 640, rowH = 44, left = 230, right = 24, top = 10, H = top + spec.rows.length * rowH + 34;
+    const W = 640, rowH = spec.rowH || 44, left = spec.left || 230, right = 24, top = 10, H = top + spec.rows.length * rowH + 34;
     const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Estimates with 95% intervals' }, b);
     const x = v => left + (v - spec.min) / (spec.max - spec.min) * (W - left - right);
     spec.ticks.forEach(t => {
       el('line', { x1: x(t), x2: x(t), y1: top, y2: H - 28, class: t === 0 ? 'czero' : 'cgrid' }, svg);
-      txt(svg, x(t), H - 10, String(t), 'ct');
+      txt(svg, x(t), H - 10, (spec.fmt || String)(t), 'ct');
     });
     const rows = [];
     spec.rows.forEach((r, i) => {
@@ -135,5 +135,46 @@
     table(fig, [spec.xlab, spec.ylab, '95% interval'], spec.pts.map(p => [spec.xname(p.x), spec.fmt(p.y), `${spec.fmt(p.lo)} – ${spec.fmt(p.hi)}`]));
   }
 
-  window.Charts = { panels, forest, band };
+  // Binned means with 95% intervals and a fitted line through the origin.
+  // spec: {xlab, ylab, fmt, slope, pts:[{x, y, lo, hi}], xmin, xmax, ymin, ymax, xticks, yticks}
+  function dots(fig, spec) {
+    const b = body(fig);
+    const W = 640, H = 300, L = 56, R = 20, T = 16, B = 44;
+    const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': spec.ylab }, b);
+    const x = v => L + (v - spec.xmin) / (spec.xmax - spec.xmin) * (W - L - R), y = v => H - B - (v - spec.ymin) / (spec.ymax - spec.ymin) * (H - T - B);
+    spec.yticks.forEach(t => { el('line', { x1: L, x2: W - R, y1: y(t), y2: y(t), class: t === 0 ? 'czero' : 'cgrid' }, svg); txt(svg, L - 8, y(t) + 4, spec.fmt(t), 'ct', 'end'); });
+    spec.xticks.forEach(t => txt(svg, x(t), H - B + 20, spec.fmt(t), 'ct'));
+    txt(svg, (L + W - R) / 2, H - 6, spec.xlab, 'cs');
+    el('line', { x1: x(spec.xmin), x2: x(spec.xmax), y1: y(spec.slope * spec.xmin), y2: y(spec.slope * spec.xmax), class: 'cline' }, svg);
+    spec.pts.forEach(p => {
+      el('line', { x1: x(p.x), x2: x(p.x), y1: y(p.lo), y2: y(p.hi), class: 'cci m' }, svg);
+      el('circle', { cx: x(p.x), cy: y(p.y), r: 5.5, class: 'cdot' }, svg);
+      const hit = el('rect', { x: x(p.x) - 16, y: T, width: 32, height: H - T - B, class: 'chit' }, svg);
+      hover(hit, `${spec.xname(p.x)}<br><b>${spec.fmt(p.y)}</b> ${spec.ylab}<br>95% interval ${spec.fmt(p.lo)} – ${spec.fmt(p.hi)}`);
+    });
+    table(fig, [spec.xlab, spec.ylab, '95% interval'], spec.pts.map(p => [spec.fmt(p.x), spec.fmt(p.y), `${spec.fmt(p.lo)} – ${spec.fmt(p.hi)}`]));
+  }
+
+  // Histogram. spec: {xlab, edges:[...], counts:[...], fmt, split} — bins below `split` are muted.
+  function hist(fig, spec) {
+    const b = body(fig);
+    const W = 640, H = 260, L = 44, R = 20, T = 16, B = 44, n = spec.counts.length;
+    const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': spec.xlab }, b);
+    const max = Math.max(...spec.counts) * 1.1, e0 = spec.edges[0], e1 = spec.edges[n];
+    const x = v => L + (v - e0) / (e1 - e0) * (W - L - R), y = v => H - B - v / max * (H - T - B);
+    (spec.yticks || []).forEach(t => { el('line', { x1: L, x2: W - R, y1: y(t), y2: y(t), class: 'cgrid' }, svg); txt(svg, L - 8, y(t) + 4, String(t), 'ct', 'end'); });
+    spec.counts.forEach((c, i) => {
+      const a = spec.edges[i], z = spec.edges[i + 1], bw = x(z) - x(a) - 2;
+      if (c > 0) el('path', { d: barPath(x(a) + 1, y(0), bw, y(c)), class: 'cbar ' + (z <= spec.split ? 'm' : 's0') }, svg);
+      const hit = el('rect', { x: x(a), y: T, width: x(z) - x(a), height: H - T - B, class: 'chit' }, svg);
+      hover(hit, `${spec.fmt(a)} to ${spec.fmt(z)}<br><b>${c}</b> ${spec.unit}`);
+    });
+    el('line', { x1: L, x2: W - R, y1: y(0), y2: y(0), class: 'cbase' }, svg);
+    el('line', { x1: x(spec.split), x2: x(spec.split), y1: T, y2: y(0), class: 'czero' }, svg);
+    spec.xticks.forEach(t => txt(svg, x(t), H - B + 20, spec.fmt(t), 'ct'));
+    txt(svg, (L + W - R) / 2, H - 6, spec.xlab, 'cs');
+    table(fig, [spec.xlab, spec.unit], spec.counts.map((c, i) => [`${spec.fmt(spec.edges[i])} to ${spec.fmt(spec.edges[i + 1])}`, c]));
+  }
+
+  window.Charts = { panels, forest, band, dots, hist };
 })();

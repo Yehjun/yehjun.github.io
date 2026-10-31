@@ -1,5 +1,4 @@
 :root{--c1:#2a78d6;--c2:#eb6834;--bg:#f7f4ef;--ink:#1d1b18;--soft:#5c574f;--faint:#9a9388;--line:#e3ddd3;--card:#fffdf9;--accent:#c2553a}
-@media (prefers-color-scheme:dark){:root{--c1:#3987e5;--c2:#d95926;--bg:#1c1a17;--ink:#f1ece4;--soft:#b5ada1;--faint:#7d766c;--line:#34302a;--card:#24211d;--accent:#e07a5c}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
@@ -106,6 +105,7 @@ a.inline{color:var(--ink);text-decoration-color:var(--accent);text-underline-off
 .clegend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px;vertical-align:-1px}
 .clegend i.s0,.cbar.s0{background:var(--c1);fill:var(--c1)}
 .clegend i.s1,.cbar.s1{background:var(--c2);fill:var(--c2)}
+.cbar.m{fill:var(--line)}
 .cpanels{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px 18px}
 .cpt{font:600 13.5px Inter,sans-serif;text-align:center}.cps{font-size:12px;color:var(--faint);text-align:center}
 .cfoot{font:400 11.5px "JetBrains Mono",monospace;color:var(--soft);text-align:center;margin-top:2px}

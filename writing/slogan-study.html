@@ -31,7 +31,7 @@
   <p class="kicker" style="margin-top:28px">Research note · Job market paper</p>
   <h1>The sensory side of AI-written slogans</h1>
   <p class="dek">Words carry sensory associations as well as meaning. In a preregistered experiment, slogans that AI wrote on the spot were rated higher when their sensory profile matched the brand's, with message and sentiment held constant.</p>
-  <p class="byline">Yeh Jun Lee · October 2026 · 7 min read</p>
+  <p class="byline">Yeh Jun Lee · October 2026 · 9 min read</p>
 
   <h2>Meaning has a sensory side</h2>
 
@@ -72,6 +72,22 @@
 
   <p>Slogans with higher sensory fit were rated more favorably: +.19 points on a 7-point brand-attitude scale per standard deviation of fit (95% CI .12 to .26, <em>p</em> &lt; .001). The model controlled for how closely each slogan matched the brand's message, its sentiment, and word-level features such as length and word frequency. Judged fit with the brand rose in the same way.</p>
 
+  <figure class="chart" id="ch-ladder">
+    <p class="ctitle">The estimate barely moves as controls are added</p>
+    <p class="csub">Effect of one standard deviation of sensory fit on brand attitude (7-point scale), with 95% intervals. Each row adds a group of controls to the row above.</p>
+    <figcaption>The fifth row is the preregistered model. Across all 32 combinations of the five control groups, the estimate stays between +.18 and +.25. The other rows are exploratory.</figcaption>
+  </figure>
+
+  <h2>Holding meaning fixed</h2>
+
+  <p>The obvious worry is that sensory fit stands in for meaning: a line that says what the brief says might also share its sensory profile. Within a list, though, meaning, sentiment and word-level features together account for only about a third of the variation in sensory fit. The chart below removes that third from both sensory fit and attitude and plots what is left.</p>
+
+  <figure class="chart" id="ch-av">
+    <p class="ctitle">With meaning, sentiment and word features held equal</p>
+    <p class="csub">Both axes are adjusted for what meaning match, sentiment and word-level features predict. Slogans are grouped into ten equal bins of adjusted sensory fit; points show the mean adjusted attitude with 95% intervals, and the line shows the fitted slope.</p>
+    <figcaption>The slope stays at +.19 (95% CI .13 to .24). A stricter check compares only pairs of slogans from the same list whose meaning match differs by less than .01, about a tenth of a standard deviation: across 663 such pairs the slope is +.17 (95% CI .02 to .31). Both analyses are exploratory.</figcaption>
+  </figure>
+
   <figure class="chart" id="ch-rank">
     <p class="ctitle">Attitude by sensory-fit rank within a list</p>
     <p class="csub">Each person's eight slogans ranked from lowest (1) to highest (8) sensory fit. Points show attitude relative to that person's own average, with 95% intervals.</p>
@@ -80,18 +96,32 @@
 
   <h2>Why single examples don't settle it</h2>
 
-  <p>Single ratings are noisy, and any one pair of slogans can look like a matter of taste. The preference appears consistently once thousands of ratings are pooled. That is why the measure needs to be automated: it can score every candidate in seconds, which no panel of raters can do for copy that AI writes on demand.</p>
+  <p>Each participant's list of eight slogans is a small experiment of its own, and on its own it is noisy: one person's ratings of eight lines can easily run against the overall pattern, and any one pair of slogans can look like a matter of taste.</p>
+
+  <figure class="chart" id="ch-hist">
+    <p class="ctitle">Each list on its own</p>
+    <p class="csub">Slope of attitude on sensory fit within each of the 459 lists (one person, one brand, eight slogans).</p>
+    <figcaption>65% of lists slope upward and a third slope downward, so a single list is mostly noise. Pooled, the average slope is +.23 (95% CI .18 to .29); in almost any order, the interval excludes zero once about 66 lists are combined.</figcaption>
+  </figure>
+
+  <figure class="chart" id="ch-brands">
+    <p class="ctitle">Brand by brand: the lowest-fit slogan</p>
+    <p class="csub">Attitude toward each list's lowest-fit slogan relative to the person's own average, by brand, with 95% intervals (20 to 27 lists per brand).</p>
+    <figcaption>The lowest-fit slogan was rated below the person's average for 18 of the 20 brands, and no brand's interval lies above zero. Exploratory.</figcaption>
+  </figure>
+
+  <p>The preference appears once ratings are pooled, and it holds brand after brand. That is also why the measure needs to be automated: it can score every candidate in seconds, which no panel of raters can do for copy that AI writes on demand.</p>
 
   <h2>What it means for brands using AI</h2>
 
   <p>AI-written copy evokes sensory associations whether or not anyone checks them. The results suggest a screening step before audience testing: generate many candidates, set aside those lowest in sensory fit, and then choose on message. The final choice should still be validated with the actual audience.</p>
 
   <div class="try">
-    <p><b>Slogan Studio</b>Replay the study's AI-written candidates for any of its 20 brands and see how the screening rule ranks them.</p>
+    <p><b>Slogan Studio</b>See every slogan people actually rated for each of the 20 brands, and how the screening rule ranks fresh candidates.</p>
     <a class="btn solid" href="../studio/">Try the demo →</a>
   </div>
 
-  <div class="note">This note describes a study from my job market paper (sole-authored, targeted to the <em>Journal of Marketing</em>). The first test above was preregistered; the breakdown after it is exploratory. All brands are fictitious. Questions and collaboration ideas are welcome: <a href="mailto:yehjun@vt.edu">yehjun@vt.edu</a>.</div>
+  <div class="note">This note describes a study from my job market paper (sole-authored, targeted to the <em>Journal of Marketing</em>). The main test above was preregistered; the control ladder, the analyses holding meaning fixed, and the list and brand breakdowns are exploratory. All brands are fictitious. Questions and collaboration ideas are welcome: <a href="mailto:yehjun@vt.edu">yehjun@vt.edu</a>.</div>
 
   <p class="sources">References: Osgood, C. E., Suci, G. J., &amp; Tannenbaum, P. H. (1957). <em>The measurement of meaning</em>. University of Illinois Press. · Ramachandran, V. S., &amp; Hubbard, E. M. (2001). Synaesthesia: A window into perception, thought and language. <em>Journal of Consciousness Studies</em>, 8(12), 3–34. · Ćwiek, A., et al. (2022). The bouba/kiki effect is robust across cultures and writing systems. <em>Philosophical Transactions of the Royal Society B</em>, 377(1841), 20200390. ·Spence, C. (2011). Crossmodal correspondences: A tutorial review. <em>Attention, Perception, &amp; Psychophysics</em>, 73(4), 971–995. · Klink, R. R. (2000). Creating brand names with meaning: The use of sound symbolism. <em>Marketing Letters</em>, 11(1), 5–20. · Yorkston, E., &amp; Menon, G. (2004). A sound idea: Phonetic effects of brand names on consumer judgments. <em>Journal of Consumer Research</em>, 31(1), 43–51.<br><br><a class="back" href="../#writing">← Back to writing</a></p>
 </article></div>
@@ -105,6 +135,33 @@ Charts.band(document.getElementById('ch-rank'), {
   pts: R.map((r, i) => ({x: i + 1, y: r[0], lo: r[1], hi: r[2]})),
   ymin: -0.7, ymax: 0.4, yticks: [-0.6, -0.4, -0.2, 0, 0.2, 0.4],
   xticks: [1,2,3,4,5,6,7,8].map(v => ({v, l: String(v)}))
+});
+// Mixed models with the preregistered random slopes; row 5 is the preregistered test.
+const LADDER = [['Sensory fit alone', 0.233, 0.161, 0.305], ['+ meaning match', 0.188, 0.111, 0.264], ['+ sentiment', 0.179, 0.107, 0.251, 'SiEBERT and VADER'],
+  ['+ word-level features', 0.192, 0.121, 0.262, 'length, frequency, concreteness, …'], ['+ screen position', 0.192, 0.121, 0.263, 'preregistered model'], ['+ which AI wrote it', 0.192, 0.121, 0.264]];
+Charts.forest(document.getElementById('ch-ladder'), {
+  min: -0.05, max: 0.35, ticks: [0, 0.1, 0.2, 0.3], fmt: f2, left: 220,
+  rows: LADDER.map(r => ({label: r[0], est: r[1], lo: r[2], hi: r[3], sub: r[4]}))
+});
+// Added-variable bins: [adjusted fit (SD), mean adjusted attitude, lo, hi].
+const AV = [[-1.546,-0.385,-0.527,-0.252],[-0.825,-0.186,-0.304,-0.072],[-0.395,0.041,-0.073,0.153],[-0.13,0.075,-0.056,0.192],[0.045,0.028,-0.094,0.15],[0.185,0.037,-0.074,0.146],[0.322,0.041,-0.085,0.176],[0.488,0.153,0.032,0.275],[0.713,-0.043,-0.141,0.06],[1.144,0.239,0.113,0.369]];
+Charts.dots(document.getElementById('ch-av'), {
+  xlab: 'sensory fit beyond meaning, sentiment and word features (SD)', ylab: 'adjusted attitude', fmt: f2, slope: 0.186,
+  xname: x => 'Adjusted sensory fit ' + f2(x) + ' SD',
+  pts: AV.map(r => ({x: r[0], y: r[1], lo: r[2], hi: r[3]})),
+  xmin: -1.8, xmax: 1.4, ymin: -0.6, ymax: 0.4, yticks: [-0.6, -0.4, -0.2, 0, 0.2, 0.4], xticks: [-1.5, -1, -0.5, 0, 0.5, 1]
+});
+Charts.hist(document.getElementById('ch-hist'), {
+  xlab: 'within-list slope of attitude on sensory fit (points per SD)', unit: 'lists', fmt: f2, split: 0,
+  edges: [-1.6,-1.4,-1.2,-1.0,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6],
+  counts: [0,1,4,6,4,32,35,69,71,71,55,39,34,18,12,2],
+  xticks: [-1.5, -1, -0.5, 0, 0.5, 1, 1.5], yticks: [0, 20, 40, 60]
+});
+// Lowest-fit slogan vs. the person's own average, by brand: [brand, category, est, lo, hi, lists].
+const BR = [["Vellumere","skincare brand",-1.176,-1.779,-0.573,22],["Everkind","veterinary hospital",-1.045,-1.604,-0.487,22],["Boparoo","dance studio",-0.929,-1.547,-0.31,21],["Emberfell","lodge",-0.913,-1.496,-0.33,23],["Nookettle","cafe",-0.869,-1.439,-0.299,21],["Nightloom","planetarium",-0.675,-1.254,-0.096,25],["Curivest","bank",-0.636,-1.196,-0.076,22],["Chromelle","hotel",-0.619,-1.165,-0.074,22],["Hosewise","brewery",-0.542,-0.998,-0.085,27],["Kindstead","funeral home",-0.494,-0.924,-0.064,21],["Tockwell","watch repair shop",-0.451,-0.991,0.089,23],["Tumblegrain","toy company",-0.449,-1.008,0.11,22],["Lumenward","library",-0.44,-0.931,0.05,23],["Handselve","tailor",-0.404,-0.85,0.042,26],["Climbrio","workspace",-0.229,-0.803,0.345,24],["Hearthling","language school",-0.18,-0.68,0.32,25],["Rubblekind","demolition company",-0.153,-0.751,0.445,27],["Ciphermere","club",-0.074,-0.661,0.514,22],["Afterhours Static","cafe",0.094,-0.463,0.65,20],["Nightshift","bus company",0.238,-0.389,0.865,21]];
+Charts.forest(document.getElementById('ch-brands'), {
+  min: -1.9, max: 1.0, ticks: [-1.5, -1, -0.5, 0, 0.5], fmt: f2, rowH: 28, left: 230,
+  rows: BR.map(r => ({label: r[0] + ', ' + r[1], est: r[2], lo: r[3], hi: r[4], tip: r[5] + ' lists'}))
 });
 </script>
 </body>
